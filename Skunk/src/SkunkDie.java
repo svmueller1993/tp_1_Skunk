@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class SkunkDie
 {
-
+	//Testing
 	private ArrayList <Integer> die = new <Integer> ArrayList();
 	Scanner scan = new Scanner(System.in);
 	
