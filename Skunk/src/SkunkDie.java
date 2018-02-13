@@ -18,7 +18,10 @@ public class SkunkDie
 		
 	}
 	
-	public void PreDeterminedRoll() //Due Sat 2/17
+	/**
+	 * Testing roll method for pre-determined outcomes of the die roll
+	 */
+	public void PreDeterminedRoll() 
 	{
 		System.out.println("Would you like to roll the dice? Enter 1 for yes 2 for no");
 		int ans = scan.nextInt();
