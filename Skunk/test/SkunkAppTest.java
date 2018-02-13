@@ -1,12 +1,12 @@
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-class SkunkAppTest
+public class SkunkAppTest
 {
 
 	@Test
-	void test()
+	public void test()
 	{
 		fail("Not yet implemented");
 	}
