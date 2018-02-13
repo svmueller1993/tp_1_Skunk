@@ -1,4 +1,5 @@
 
-public class SkunkApp {
+public class SkunkApp
+{
 
 }
