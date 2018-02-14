@@ -13,7 +13,5 @@ public class SkunkApp
 		p.PreDeterminedRoll();
 		
 	}
-	
-	
-	
+		
 }
