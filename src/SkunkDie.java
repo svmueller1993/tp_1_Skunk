@@ -1,64 +1,38 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
-
+/**
+ * This class presents die. It can be rolled and return last rolled value.
+ * 
+ * @author Bagy
+ *
+ */
 public class SkunkDie
 {
-	//Test class
-	private ArrayList <Integer> die = new <Integer> ArrayList();
-	Scanner scan = new Scanner(System.in);
 	private int lastRoll;
-	
+
 	public SkunkDie()
 	{
-		die.add(1);
-		die.add(2);
-		die.add(3);
-		die.add(4);
-		die.add(5);
-		die.add(6);
-		lastRoll = 0;
-		
-		
+		roll();
+	}
+
+	/**
+	 * Set last roll value with random number between 1 and 6
+	 */
+	public void roll()
+	{
+		lastRoll = ((int) (Math.random() * 6 + 1));
 	}
 	
-	public void PreDeterminedRoll() //Due Sat 2/17
-	{
-		System.out.println("Would you like to roll the dice? Enter 1 for yes 2 for no");
-		int ans = scan.nextInt();
-		lastRoll = 0;
-		while (ans == 1)
-		{
-		System.out.println(die.get(lastRoll));
-		System.out.println("Would you like to roll again?");
-		ans = scan.nextInt();
-		if(ans ==1)
-		{
-		lastRoll++;
-		continue;
-		}
-		if (ans == 2)
-		{
-			break;
-		}
-		}
-		
-		if(ans == 2)
-		{
-			System.out.println("Thanks for playing!");
-		}
-			
+	/**
+	 * Returns last roll value
+	 * @return value between 1 and 6
+	 */
+	public int getLastRoll() {
+		return lastRoll;
 	}
-		
-		
 	
-	
-	
-	public static void main(String[] args)
+	@Override
+	public String toString()
 	{
-		SkunkDie s = new SkunkDie();
-		s.PreDeterminedRoll();
+		return "Die lastRoll=" + lastRoll;
 	}
 	
 }
-
