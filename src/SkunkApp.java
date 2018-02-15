@@ -4,7 +4,7 @@
  * @author Bagy, Sara
  *
  */
-public class SkunkApp 
+public class SkunkApp extends PreProgrammedSkunkDie
 {
 	/**
 	 * Testing roll method for pre-determined outcomes of the die roll
@@ -43,6 +43,9 @@ public class SkunkApp
 	{
 		SkunkApp p = new SkunkApp();
 		p.PreDeterminedRoll();
+		p.roll();
+		
+		
 	}
 		
 }
