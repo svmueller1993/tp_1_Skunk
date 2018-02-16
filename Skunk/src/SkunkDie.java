@@ -1,4 +1,3 @@
-
 /**
  * This class presents die. It can be rolled and return last rolled value.
  * 
@@ -21,19 +20,21 @@ public class SkunkDie
 	{
 		lastRoll = ((int) (Math.random() * 6 + 1));
 	}
-	
+
 	/**
 	 * Returns last roll value
+	 * 
 	 * @return value between 1 and 6
 	 */
-	public int getLastRoll() {
+	public int getLastRoll()
+	{
 		return lastRoll;
 	}
-	
+
 	@Override
 	public String toString()
 	{
 		return "Die lastRoll=" + lastRoll;
 	}
-	
+
 }
