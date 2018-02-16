@@ -1,26 +1,18 @@
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.Assert;
+public class SkunkAppTest {
 
-public class SkunkAppTest
-{
-
-	@Test
-	public void test()
-	{
-		fail("Not yet implemented");
+	@Before
+	public void setUp() throws Exception {
 	}
 
 	@Test
-	public static void testPreDeterminedRoll()
-	{
-		SkunkApp s = new SkunkApp();
-		s.roll();
-		s.roll();
-		s.roll();
-		Assert.assertEquals(3, s.getLastRoll());
+	public void testMain() {
+		SkunkApp skunkApp = new SkunkApp();
+		assertNotNull(skunkApp);
 	}
 
 }

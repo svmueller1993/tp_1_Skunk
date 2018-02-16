@@ -18,7 +18,7 @@ public class PreProgrammedSkunkDie extends SkunkDie
 		predefinedValues.add(4);
 		predefinedValues.add(5);
 		predefinedValues.add(6);
-		predefinedRoll = 0;
+		predefinedRoll = -1;
 	}
 	
 	@Override
@@ -31,6 +31,9 @@ public class PreProgrammedSkunkDie extends SkunkDie
 	public int getLastRoll()
 	{
 		if (predefinedRoll == predefinedValues.size()) {
+			predefinedRoll = 0;
+		}
+		if (predefinedRoll < 0) {
 			predefinedRoll = 0;
 		}
 		return predefinedValues.get(predefinedRoll);
