@@ -1,3 +1,8 @@
+/**
+ * This class creates new player objects
+ * @author saramueller
+ *
+ */
 
 public class SkunkPlayer {
 	
