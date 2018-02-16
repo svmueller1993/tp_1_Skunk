@@ -17,12 +17,12 @@ public class SkunkApp
 		PreProgrammedSkunkDie die1 = new PreProgrammedSkunkDie();
 		PreProgrammedSkunkDie die2 = new PreProgrammedSkunkDie();
 		SkunkDice dice = new SkunkDice(die1, die2);
-		if(ans == 2)
+		if (ans == 2)
 		{
 			System.out.println("Thanks for playing!");
 		}
 		while (ans == 1)
-		{	
+		{
 			dice.roll();
 			System.out.println(dice.getLastRoll1());
 			System.out.println("Would you like to roll again?");
@@ -35,15 +35,16 @@ public class SkunkApp
 		}
 
 	}
-	
+
 	/**
 	 * Starting point of app.
+	 * 
 	 * @param args
 	 */
-	public static void main(String[]args)
+	public static void main(String[] args)
 	{
 		SkunkApp p = new SkunkApp();
 		p.preDeterminedRoll();
 	}
-		
+
 }

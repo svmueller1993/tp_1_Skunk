@@ -5,20 +5,24 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SkunkDieTest {
+public class SkunkDieTest
+{
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 	}
 
 	@Test
-	public void testSkunkDie() {
+	public void testSkunkDie()
+	{
 		SkunkDie die = new SkunkDie();
 		assertNotNull(die);
 	}
 
 	@Test
-	public void testRoll() {
+	public void testRoll()
+	{
 		SkunkDie die = new SkunkDie();
 		die.roll();
 		int lastRoll = die.getLastRoll();
@@ -27,7 +31,8 @@ public class SkunkDieTest {
 	}
 
 	@Test
-	public void testGetLastRoll() {
+	public void testGetLastRoll()
+	{
 		SkunkDie die = new SkunkDie();
 		die.roll();
 		int lastRoll = die.getLastRoll();
@@ -36,7 +41,8 @@ public class SkunkDieTest {
 	}
 
 	@Test
-	public void testToString() {
+	public void testToString()
+	{
 		SkunkDie die = new SkunkDie();
 		die.roll();
 		int lastRoll = die.getLastRoll();

@@ -3,14 +3,17 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SkunkAppTest {
+public class SkunkAppTest
+{
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 	}
 
 	@Test
-	public void testMain() {
+	public void testMain()
+	{
 		SkunkApp skunkApp = new SkunkApp();
 		assertNotNull(skunkApp);
 	}
