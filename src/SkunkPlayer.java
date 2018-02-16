@@ -4,7 +4,8 @@
  *
  */
 
-public class SkunkPlayer {
+public class SkunkPlayer 
+{
 	
 	private String playerName;
 	private int playerTotalScore;
@@ -50,6 +51,14 @@ public class SkunkPlayer {
 	}
 	
 	/*
+	 * Geteter for player name
+	 */
+	public string getPlayerName()
+	{
+		return playerName;
+	}
+	
+	/*
 	 * Getter for players total score
 	 */
 	public int getPlayerTotalScore()
@@ -88,6 +97,5 @@ public class SkunkPlayer {
 	{
 		return blueChips;
 	}
-	
 
 }
