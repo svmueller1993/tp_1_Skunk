@@ -33,18 +33,9 @@ public class SkunkApp
 				break;
 			}
 		}
-
-<<<<<<< HEAD
-	  }
-=======
 	}
+	
 
->>>>>>> branch 'master' of https://github.com/svmueller1993/tp_1_Skunk
-	/**
-	 * Starting point of app.
-	 * 
-	 * @param args
-	 */
 	public static void main(String[] args)
 	{
 		SkunkApp p = new SkunkApp();

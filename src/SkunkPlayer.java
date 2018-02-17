@@ -51,9 +51,9 @@ public class SkunkPlayer
 	}
 	
 	/*
-	 * Geteter for player name
+	 * Getter for player name
 	 */
-	public string getPlayerName()
+	public String getPlayerName()
 	{
 		return playerName;
 	}
