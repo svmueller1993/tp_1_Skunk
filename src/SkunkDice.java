@@ -1,6 +1,6 @@
 /**
  * This class has two dice and allows roll them.
- *
+ * @see Dice.java file in the 635_craps_simulation project as reference
  */
 public class SkunkDice
 {

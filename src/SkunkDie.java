@@ -2,7 +2,7 @@
  * This class presents die. It can be rolled and return last rolled value.
  * 
  * @author Bagy
- *
+ * @see Die.java file in the 635_craps_simulation project as reference
  */
 public class SkunkDie
 {

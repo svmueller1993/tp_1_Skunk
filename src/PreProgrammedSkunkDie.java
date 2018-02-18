@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * This die class returns predefined values on rolling.
- *
+ * @see CrookedDie2.java file in the 635_craps_simulation project as reference
  */
 public class PreProgrammedSkunkDie extends SkunkDie
 {
