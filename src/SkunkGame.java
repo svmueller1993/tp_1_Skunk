@@ -13,6 +13,11 @@ public class SkunkGame
 	SkunkDie die1;
 	SkunkDie die2;
 	int numberOfPlayers;
+	int roundNumber;
+	int rollScore;
+	int roundScore;
+	boolean play;
+	ArrayList<SkunkPlayer> players = new ArrayList<SkunkPlayer> ();
 	
 	
 	public SkunkGame(SkunkDie pDie1, SkunkDie pDie2)
@@ -22,17 +27,21 @@ public class SkunkGame
 		this.die2 = pDie2;
 	}
 	
-	public void playGame()
+	/*
+	 * Sets up number of players based on user input and adds them to an array list for more automated functions in the game
+	 */
+	public void setUpPlayers()
 	{
 		System.out.println("How many players would like to play?");
 		Scanner sc = new Scanner(System.in);
 		int pnum = sc.nextInt();
 		
-		
 		if(pnum == 2)
 		{
 			SkunkPlayer p1 = new SkunkPlayer("Player 1");
 			SkunkPlayer p2 = new SkunkPlayer("Player 2");
+			players.add(p1);
+			players.add(p2);
 			numberOfPlayers = 2;
 			
 		}
@@ -42,6 +51,9 @@ public class SkunkGame
 			SkunkPlayer p1 = new SkunkPlayer("Player 1");
 			SkunkPlayer p2 = new SkunkPlayer("Player 2");
 			SkunkPlayer p3 = new SkunkPlayer("Player 3");
+			players.add(p1);
+			players.add(p2);
+			players.add(p3);
 			numberOfPlayers = 3;
 			
 			
@@ -53,9 +65,88 @@ public class SkunkGame
 			SkunkPlayer p2 = new SkunkPlayer("Player 2");
 			SkunkPlayer p3 = new SkunkPlayer("Player 3");
 			SkunkPlayer p4 = new SkunkPlayer("Player 4");
+			players.add(p1);
+			players.add(p2);
+			players.add(p3);
+			players.add(p4);
 			numberOfPlayers = 4;
 			
 		}
+		
+		
+	}
+	
+	/*
+	 * Prints scores of every player
+	 */
+	public void printAllScores()
+	{
+		for(int i = 0; i < players.size(); i++)
+		{
+			System.out.println("Player " + i+1 + "total score is: " + players.get(i).getPlayerTotalScore());
+		}
+	}
+	
+	
+	
+	public void playGame()
+	{
+		boolean flag;
+		this.setUpPlayers();
+		Scanner sc = new Scanner(System.in);
+		
+		while (play && roundNumber < 6)
+		{
+			flag = true; 
+			while (flag)
+			{
+				this.dice.roll();
+				System.out.println("Die one rolled: " + this.dice.getLastRoll1() + "Die two rolled:" + this.dice.getLastRoll2() );
+				int temp = this.dice.getLastTotalRoll();
+				if (temp == 2) //Means both dice rolled a 1 which voids all points
+				{
+					
+					for(int i = 0; i < players.size(); i++)
+					{
+						players.get(i).totalScoreVoid();
+					}
+					System.out.println("You rolled two skunks, all scores have been set back to 0");
+					flag = false;
+				}
+				
+				else
+				{
+					rollScore = this.dice.getLastTotalRoll();
+					roundScore += rollScore;
+					for(int i =0; i < players.size(); i++)
+					{
+						System.out.println("Does " + players.get(i).getPlayerName() + " want to stand or sit? 1 for stand 2 for sit.");
+						int ans = sc.nextInt();
+						if (ans == 1)
+						{
+							players.get(i).setStanding(true);
+						}
+						else
+						{
+							players.get(i).setStanding(false);
+							players.get(i).addPoints(rollScore);
+							
+						}
+						
+						flag = players.get(i).getStanding();
+					}
+				}
+				
+			}
+			
+			roundNumber ++;
+			roundScore = 0;	
+			
+		}
+		
+		
+		
+		
 		
 		
 		

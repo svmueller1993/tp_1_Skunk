@@ -28,4 +28,10 @@ public class SkunkDice
 	{
 		return die2.getLastRoll();
 	}
+	
+	public int getLastTotalRoll()
+	{
+		return die1.getLastRoll() + die2.getLastRoll();
+		
+	}
 }

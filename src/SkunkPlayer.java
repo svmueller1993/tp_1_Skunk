@@ -17,6 +17,7 @@ public class SkunkPlayer
 	private int whiteChips;
 	private int blueChips;
 	private int redChips;
+	private boolean standing;
 	
 	
 	public SkunkPlayer(String name)
@@ -54,6 +55,22 @@ public class SkunkPlayer
 	public void totalScoreVoid()
 	{
 		playerTotalScore = 0;
+	}
+	
+	/*
+	 * Setter for standing status of player
+	 */
+	public void setStanding(boolean a)
+	{
+		standing = a;
+	}
+	
+	/*
+	 * returns whether or not the player is standing
+	 */
+	public boolean getStanding()
+	{
+		return standing;
 	}
 	
 	/*
