@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.ArrayList;
+
 /**
  * This class creates new player objects
  * @author saramueller
@@ -14,6 +18,7 @@ public class SkunkPlayer
 	private int blueChips;
 	private int redChips;
 	
+	
 	public SkunkPlayer(String name)
 	{
 		playerName = name;
@@ -23,6 +28,7 @@ public class SkunkPlayer
 		blueChips = 5;
 		redChips = 2;
 	}
+	
 	
 	/**
 	 * Adds round points to total score
