@@ -28,7 +28,7 @@ public class SkunkGame
 	}
 	
 	/*
-	 * Sets up number of players based on user input and adds them to an array list for more automated functions in the game
+	 * Sets up number of players based on user input and adds them to an array list for more automated functions in the game will add option for more players
 	 */
 	public void setUpPlayers()
 	{

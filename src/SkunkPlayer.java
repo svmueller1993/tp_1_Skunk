@@ -58,7 +58,7 @@ public class SkunkPlayer
 	}
 	
 	/*
-	 * Setter for standing status of player
+	 * Setter for if the player is standing or not
 	 */
 	public void setStanding(boolean a)
 	{

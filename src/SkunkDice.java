@@ -29,6 +29,9 @@ public class SkunkDice
 		return die2.getLastRoll();
 	}
 	
+	/*
+	 * Returns total of both dice
+	 */
 	public int getLastTotalRoll()
 	{
 		return die1.getLastRoll() + die2.getLastRoll();
