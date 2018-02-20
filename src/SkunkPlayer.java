@@ -13,7 +13,7 @@ public class SkunkPlayer
 	
 	private String playerName;
 	private int playerTotalScore;
-	private int playerRoundScore;
+	private int playerRollScore;
 	private int whiteChips;
 	private int blueChips;
 	private int redChips;
@@ -24,7 +24,6 @@ public class SkunkPlayer
 	{
 		playerName = name;
 		playerTotalScore = 0;
-		playerRoundScore = 0;
 		whiteChips = 10; //just a filler number, not sure how many chips to assign to each player
 		blueChips = 5;
 		redChips = 2;
@@ -35,18 +34,10 @@ public class SkunkPlayer
 	 * Adds round points to total score
 	 * @param numberOfRoundPoints
 	 */
-	public void addPoints(int numberOfRoundPoints)
+	public void addPoints(int numberOfRollPoints)
 	{
-		playerRoundScore = numberOfRoundPoints;
-		playerTotalScore += playerRoundScore;
-	}
-	
-	/*
-	 * Voids the players round score when skunk is rolled
-	 */
-	public void voidRoundScore()
-	{
-		playerRoundScore = 0;
+		playerRollScore = numberOfRollPoints;
+		playerTotalScore += playerRollScore;
 	}
 	
 	/*
@@ -57,6 +48,11 @@ public class SkunkPlayer
 		playerTotalScore = 0;
 	}
 	
+	
+	public void setTotalScore(int score)
+	{
+		playerTotalScore = score;
+	}
 	/*
 	 * Setter for if the player is standing or not
 	 */
@@ -87,14 +83,6 @@ public class SkunkPlayer
 	public int getPlayerTotalScore()
 	{
 		return playerTotalScore;
-	}
-	
-	/*
-	 * Getter for players round score
-	 */
-	public int getPlayerRoundScore()
-	{
-		return playerRoundScore;
 	}
 	
 	/*

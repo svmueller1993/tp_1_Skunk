@@ -90,6 +90,7 @@ public class SkunkGame
 			StdOut.println("\nWould you like to roll the dice(y/n)?");
 			String d = StdIn.readString();
 			if(d.equals("n")) {
+				roundScore = 0;
 				// next player will take turn
 				return;
 			}
@@ -102,23 +103,29 @@ public class SkunkGame
 			{
 				player.totalScoreVoid();
 				StdOut.println("You rolled two skunks, all scores have been set back to 0.");
+				roundScore = 0;
 				return;
 			} 
-			else if (dice.getLastRoll1() == 1 || dice.getLastRoll2() == 1) // next player will take turn
+			else if (dice.getLastRoll1() == 1 || dice.getLastRoll2() == 1) // next player will take turn and voids players round score
 			{
+				player.setTotalScore(player.getPlayerTotalScore() - roundScore);
 				StdOut.println("You rolled one skunks, next player will take turn.");
+				roundScore = 0;
 				return;
 			}
 			else
 			{
+				roundScore += rollScore;
 				player.addPoints(rollScore);
 				if (player.getPlayerTotalScore() >= 100) {
 					StdOut.println("Your score is more than 100.");
 					StdOut.println("Winner is " + player.getPlayerName());
 					System.exit(0);
 				}
+				
 				StdOut.println("Your score is " + player.getPlayerTotalScore());
 			}
+			
 		}
 	}
 
