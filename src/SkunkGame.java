@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class SkunkGame
 	int roundScore;
 	int roundChips;
 	boolean play;
+	SkunkPlayer roundWinner;
 	List<SkunkPlayer> players = new ArrayList<SkunkPlayer>();
 
 	public SkunkGame(SkunkDie pDie1, SkunkDie pDie2)
@@ -50,20 +52,26 @@ public class SkunkGame
 	}
 
 	/*
-	 * Prints scores of every player
+	 * Finds the winner of each round in order to give them the round chips
 	 */
-	public void printAllScores()
+	public void getRoundWinner()
 	{
-		for (int i = 0; i < players.size(); i++)
+		ArrayList <Integer> scores = new ArrayList<Integer>();
+		for (int i = 0; i<players.size(); i++)
 		{
-			System.out.println("Player " + i + 1 + "total score is: " + players.get(i).getPlayerTotalScore());
+			scores.add(players.get(i).getRoundScore());
 		}
+		
+		int topScore = Collections.max(scores);
+		int a = scores.indexOf(topScore);
+		roundWinner = players.get(a);
+		
 	}
 
 	public void playGame()
 	{
 		setUpPlayers();
-		StdOut.println("Would you like to read the rules of the game?(y/n)");
+		StdOut.println("\nWould you like to read the rules of the game?(y/n)");
 		String a = StdIn.readString();
 		if(a.equals("y"))//Part of assignment 3 - option to print out instructions
 		{
@@ -90,12 +98,15 @@ public class SkunkGame
 			{
 				SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
 				StdOut.println("Player name : " + skunkPlayer.getPlayerName());
-				StdOut.println("By now you score is : " + skunkPlayer.getPlayerTotalScore());
+				StdOut.println("Your total score is: " + skunkPlayer.getPlayerTotalScore());
 				playGameForOnePlayer(skunkPlayer);
 				StdOut.println("Player total score : " + skunkPlayer.getPlayerTotalScore());
 				StdOut.println("--------------------------------------------------");
 			}
-
+			this.getRoundWinner();
+			roundWinner.setChips(roundWinner.getChips() + roundChips);//adding chips taken from players who rolled skunk and giving it to the player with the highest round score
+			StdOut.println("The round winner is: " +  roundWinner.getPlayerName() + " with a round score of " + roundWinner.getRoundScore() + " and has recieved " + roundChips + " chips for a total of " + roundWinner.getChips() + " chips!" );
+			roundWinner = null;
 			roundNumber++;
 		}
 		
@@ -126,6 +137,7 @@ public class SkunkGame
 				player.setChips(player.getChips() - 4);
 				StdOut.println("You rolled two skunks, all scores have been set back to 0." + " You have " + player.getChips() + " chips left");
 				roundScore = 0;
+				player.setRoundScore(roundScore);
 				roundChips = roundChips + 4;
 				return;
 			} 
@@ -135,6 +147,7 @@ public class SkunkGame
 				player.setChips(player.getChips() - 2);
 				StdOut.println("You rolled one skunk and a duece, next player will take turn." + " You have " + player.getChips() + " chips left");
 				roundScore = 0;
+				player.setRoundScore(roundScore);
 				roundChips = roundChips + 2;
 				return;
 			}
@@ -144,12 +157,14 @@ public class SkunkGame
 				player.setChips(player.getChips() - 1);
 				StdOut.println("You rolled one skunks, next player will take turn." + " You have " + player.getChips() + " chips left");
 				roundScore = 0;
+				player.setRoundScore(roundScore);
 				roundChips ++;
 				return;
 			}
 			else
 			{
 				roundScore += rollScore;
+				player.setRoundScore(roundScore);
 				player.addPoints(rollScore);
 				if (player.getPlayerTotalScore() >= 100) {
 					StdOut.println("Your score is more than 100.");

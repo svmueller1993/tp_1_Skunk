@@ -14,6 +14,7 @@ public class SkunkPlayer
 	private String playerName;
 	private int playerTotalScore;
 	private int playerRollScore;
+	private int playerRoundScore;
 	private int Chips;
 	private boolean standing;
 	
@@ -49,6 +50,18 @@ public class SkunkPlayer
 	public void setTotalScore(int score)
 	{
 		playerTotalScore = score;
+	}
+	
+	public int getRoundScore()
+	{
+		return playerRoundScore;
+	}
+	/*
+	 * Setter for round score
+	 */
+	public void setRoundScore(int score)
+	{
+		playerRoundScore = score;
 	}
 	/*
 	 * Setter for if the player is standing or not
