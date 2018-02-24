@@ -41,7 +41,7 @@ public class SkunkGame
 
 		for (int i = 0; i < numberOfPlayers; i++)
 		{
-			players.add(new SkunkPlayer("Player" + (i + 1)));
+			players.add(new SkunkPlayer("Player " + (i + 1)));
 		}
 
 	}
@@ -59,6 +59,23 @@ public class SkunkGame
 
 	public void playGame()
 	{
+		StdOut.println("Would you like to read the rules of the game?(y/n)");
+		String a = StdIn.readString();
+		if(a.equals("y"))//Part of assignment 3
+		{
+			StdOut.println("The objective of the game is to accumulate a score of 100 points or more. A score is made by rolling the dice and combining \n"
+		+ "the points on the two dice. The player has the privilege of continuing to shake to increase his score or of passing the dice to wait for \n"
+		+ "the next series, thus preventing the possibility of rolling a Skunk and losing his score.\n"
+		+ "Any number of players can play,The suggested number of chips to start is 50 \n"
+		+ "The winner of each game collects all chips in \"kitty\" and in addition ﬁve chips from each losing player or 10 chips from any player without a score. \n"
+		+ "The first player to accumulate a total of 100 or more points can continue to score as many points over 100 as he believes is needed to win.\n"
+		+ "When he decides to stop, his total score is the \"goal.\" Each succeeding player receives one more chance to better the goal and end the game.\n"
+		+ "\nPENALTIES: A skunk in any series voids the score for that series only and draws a penalty of 1 chip placed in the \"kitty,\" and loss of dice.\n"
+		+ "A skunk and a deuce voids the score for that series only and draws a penalty of 2 chips placed in the \"kitty,\" and loss of dice.\n"
+		+ "TWO skunks void the ENTIRE accumulated score and draws a penalty of 4 chips placed in the \"kitty,\" and loss of dice.\nPlayer must again start to score from scratch.\n"
+		);
+		}
+		
 		setUpPlayers();
 		play = true;
 		roundNumber = 0;
@@ -84,6 +101,7 @@ public class SkunkGame
 
 	public void playGameForOnePlayer(SkunkPlayer player)
 	{
+		
 		boolean flag = true;
 		while (flag)
 		{	
@@ -102,13 +120,23 @@ public class SkunkGame
 			if (rollScore == 2) // Means both dice rolled a 1 which voids all points
 			{
 				player.totalScoreVoid();
+				//will add statement that draws penalty of 1 chip
 				StdOut.println("You rolled two skunks, all scores have been set back to 0.");
 				roundScore = 0;
 				return;
 			} 
+			if(rollScore ==3) //rolling a skunk and a "Deuce
+			{
+				player.setTotalScore(player.getPlayerTotalScore() - roundScore);
+				//will add statement here that draws a penalty of 2 chips
+				StdOut.println("You rolled one skunk and a duece, next player will take turn.");
+				roundScore = 0;
+				return;
+			}
 			else if (dice.getLastRoll1() == 1 || dice.getLastRoll2() == 1) // next player will take turn and voids players round score
 			{
 				player.setTotalScore(player.getPlayerTotalScore() - roundScore);
+				//will add statement here that draws a penalty of 4 chips
 				StdOut.println("You rolled one skunks, next player will take turn.");
 				roundScore = 0;
 				return;
