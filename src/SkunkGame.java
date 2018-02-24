@@ -61,7 +61,7 @@ public class SkunkGame
 	{
 		StdOut.println("Would you like to read the rules of the game?(y/n)");
 		String a = StdIn.readString();
-		if(a.equals("y"))//Part of assignment 3
+		if(a.equals("y"))//Part of assignment 3 - option to print out instructions
 		{
 			StdOut.println("The objective of the game is to accumulate a score of 100 points or more. A score is made by rolling the dice and combining \n"
 		+ "the points on the two dice. The player has the privilege of continuing to shake to increase his score or of passing the dice to wait for \n"
