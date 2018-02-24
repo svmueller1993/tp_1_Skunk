@@ -14,9 +14,7 @@ public class SkunkPlayer
 	private String playerName;
 	private int playerTotalScore;
 	private int playerRollScore;
-	private int whiteChips;
-	private int blueChips;
-	private int redChips;
+	private int Chips;
 	private boolean standing;
 	
 	
@@ -24,9 +22,8 @@ public class SkunkPlayer
 	{
 		playerName = name;
 		playerTotalScore = 0;
-		whiteChips = 10; //just a filler number, not sure how many chips to assign to each player
-		blueChips = 5;
-		redChips = 2;
+		Chips = 50; 
+		
 	}
 	
 	
@@ -88,25 +85,17 @@ public class SkunkPlayer
 	/*
 	 * Getter for players amount of white chips
 	 */
-	public int getWhiteChips()
+	public int getChips()
 	{
-		return whiteChips;
+		return Chips;
 	}
 	
 	/*
-	 * Getter for players amount of red chips
+	 * Setter for chips
 	 */
-	public int getRedChips()
+	public void setChips(int num)
 	{
-		return redChips;
+		Chips = num;
 	}
 	
-	/*
-	 * Getter for players amount of blue chips
-	 */
-	public int getBlueChips()
-	{
-		return blueChips;
-	}
-
 }

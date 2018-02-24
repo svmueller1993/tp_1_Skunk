@@ -19,6 +19,7 @@ public class SkunkGame
 	int roundNumber;
 	int rollScore;
 	int roundScore;
+	int roundChips;
 	boolean play;
 	List<SkunkPlayer> players = new ArrayList<SkunkPlayer>();
 
@@ -122,25 +123,28 @@ public class SkunkGame
 			if (rollScore == 2) // Means both dice rolled a 1 which voids all points
 			{
 				player.totalScoreVoid();
-				//will add statement that draws penalty of 1 chip
-				StdOut.println("You rolled two skunks, all scores have been set back to 0.");
+				player.setChips(player.getChips() - 4);
+				StdOut.println("You rolled two skunks, all scores have been set back to 0." + " You have " + player.getChips() + " chips left");
 				roundScore = 0;
+				roundChips = roundChips + 4;
 				return;
 			} 
 			if(rollScore ==3) //rolling a skunk and a "Deuce
 			{
 				player.setTotalScore(player.getPlayerTotalScore() - roundScore);
-				//will add statement here that draws a penalty of 2 chips
-				StdOut.println("You rolled one skunk and a duece, next player will take turn.");
+				player.setChips(player.getChips() - 2);
+				StdOut.println("You rolled one skunk and a duece, next player will take turn." + " You have " + player.getChips() + " chips left");
 				roundScore = 0;
+				roundChips = roundChips + 2;
 				return;
 			}
 			else if (dice.getLastRoll1() == 1 || dice.getLastRoll2() == 1) // next player will take turn and voids players round score
 			{
 				player.setTotalScore(player.getPlayerTotalScore() - roundScore);
-				//will add statement here that draws a penalty of 4 chips
-				StdOut.println("You rolled one skunks, next player will take turn.");
+				player.setChips(player.getChips() - 1);
+				StdOut.println("You rolled one skunks, next player will take turn." + " You have " + player.getChips() + " chips left");
 				roundScore = 0;
+				roundChips ++;
 				return;
 			}
 			else
@@ -154,6 +158,8 @@ public class SkunkGame
 				}
 				
 				StdOut.println("Your score is " + player.getPlayerTotalScore());
+				StdOut.println(roundChips);
+				
 			}
 			
 		}
