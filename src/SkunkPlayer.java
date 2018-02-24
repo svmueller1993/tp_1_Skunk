@@ -51,7 +51,9 @@ public class SkunkPlayer
 	{
 		playerTotalScore = score;
 	}
-	
+	/*
+	 * getter for players round score
+	 */
 	public int getRoundScore()
 	{
 		return playerRoundScore;

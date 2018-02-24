@@ -52,7 +52,7 @@ public class SkunkGame
 	}
 
 	/*
-	 * Finds the winner of each round in order to give them the round chips
+	 * Finds the winner of each round in order to give the winner the round chips
 	 */
 	public void getRoundWinner()
 	{
