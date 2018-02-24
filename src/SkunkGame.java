@@ -38,10 +38,12 @@ public class SkunkGame
 	{
 		StdOut.println("How many players would like to play?");
 		int numberOfPlayers = StdIn.readInt();
-
+		StdOut.println("There are " + numberOfPlayers +  " players playing during this game.");
 		for (int i = 0; i < numberOfPlayers; i++)
 		{
 			players.add(new SkunkPlayer("Player " + (i + 1)));
+			StdOut.println("Player " + (i + 1));
+			
 		}
 
 	}
@@ -59,6 +61,7 @@ public class SkunkGame
 
 	public void playGame()
 	{
+		setUpPlayers();
 		StdOut.println("Would you like to read the rules of the game?(y/n)");
 		String a = StdIn.readString();
 		if(a.equals("y"))//Part of assignment 3 - option to print out instructions
@@ -76,7 +79,6 @@ public class SkunkGame
 		);
 		}
 		
-		setUpPlayers();
 		play = true;
 		roundNumber = 0;
 		while (roundNumber < 6)
