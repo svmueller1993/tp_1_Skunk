@@ -17,6 +17,7 @@ public class SkunkPlayer
 	private int playerRoundScore;
 	private int Chips;
 	private boolean standing;
+	private int roundWins;
 	
 	
 	public SkunkPlayer(String name)
@@ -111,6 +112,16 @@ public class SkunkPlayer
 	public void setChips(int num)
 	{
 		Chips = num;
+	}
+	
+	public void setRoundWins(int num)
+	{
+		roundWins = num;
+	}
+	
+	public int getRoundWins()
+	{
+		return roundWins;
 	}
 	
 }

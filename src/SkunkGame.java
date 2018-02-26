@@ -65,6 +65,7 @@ public class SkunkGame
 		int topScore = Collections.max(scores);
 		int a = scores.indexOf(topScore);
 		roundWinner = players.get(a);
+		roundWinner.setRoundWins(roundWinner.getRoundWins() + 1);
 		
 	}
 
@@ -98,7 +99,7 @@ public class SkunkGame
 			{
 				SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
 				StdOut.println("Player name : " + skunkPlayer.getPlayerName());
-				StdOut.println("Your total score is: " + skunkPlayer.getPlayerTotalScore());
+				StdOut.println("Your total score is: " + skunkPlayer.getPlayerTotalScore() + ". Your total number of round wins are: " + skunkPlayer.getRoundWins());
 				playGameForOnePlayer(skunkPlayer);
 				StdOut.println("Player total score : " + skunkPlayer.getPlayerTotalScore());
 				StdOut.println("--------------------------------------------------");
@@ -173,7 +174,7 @@ public class SkunkGame
 				}
 				
 				StdOut.println("Your score is " + player.getPlayerTotalScore());
-				StdOut.println(roundChips);
+				//StdOut.println(roundChips);
 				
 			}
 			
