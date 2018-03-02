@@ -59,7 +59,6 @@ public class SkunkGame
 		{
 			scores.add(players.get(i).getRoundScore());
 		}
-		
 		int topScore = Collections.max(scores);
 		int a = scores.indexOf(topScore);
 		roundWinner = players.get(a);
@@ -140,18 +139,22 @@ public class SkunkGame
 				roundChips = roundChips + 4;
 				return;
 			} 
-			if(rollScore ==3) //rolling a skunk and a "Deuce
-			{
-				player.setTotalScore(player.getPlayerTotalScore() - roundScore);
-				player.setChips(player.getChips() - 2);
-				StdOut.println("You rolled one skunk and a duece, next player will take turn." + " You have " + player.getChips() + " chips left");
-				roundScore = 0;
-				player.setRoundScore(roundScore);
-				roundChips = roundChips + 2;
-				return;
-			}
+			
 			else if (dice.getLastRoll1() == 1 || dice.getLastRoll2() == 1) // next player will take turn and voids players round score
 			{
+				if(rollScore ==3) //rolling a skunk and a "Deuce, needs to be in this if statement because if they roll a 2 and a 1 it goes to both statements and removes chips from both
+				{
+					player.setTotalScore(player.getPlayerTotalScore() - roundScore);
+					player.setChips(player.getChips() - 2);
+					StdOut.println("You rolled one skunk and a duece, next player will take turn." + " You have " + player.getChips() + " chips left");
+					roundScore = 0;
+					player.setRoundScore(roundScore);
+					roundChips = roundChips + 2;
+					return;
+				}
+				
+				else 
+				{
 				player.setTotalScore(player.getPlayerTotalScore() - roundScore);
 				player.setChips(player.getChips() - 1);
 				StdOut.println("You rolled one skunks, next player will take turn." + " You have " + player.getChips() + " chips left");
@@ -159,6 +162,7 @@ public class SkunkGame
 				player.setRoundScore(roundScore);
 				roundChips ++;
 				return;
+				}
 			}
 			else
 			{
