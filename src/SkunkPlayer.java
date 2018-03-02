@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.ArrayList;
-
 /**
  * This class creates new player objects
  * @author saramueller

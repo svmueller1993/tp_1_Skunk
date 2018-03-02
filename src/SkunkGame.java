@@ -1,6 +1,4 @@
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -95,7 +93,7 @@ public class SkunkGame
 		{   
 			StdOut.println("====================================================");
 			StdOut.println("Game round : " + (roundNumber + 1));
-			for (Iterator iterator = players.iterator(); iterator.hasNext();)
+			for (Iterator<SkunkPlayer> iterator = players.iterator(); iterator.hasNext();)
 			{
 				SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
 				StdOut.println("Player name : " + skunkPlayer.getPlayerName());
@@ -174,7 +172,6 @@ public class SkunkGame
 				}
 				
 				StdOut.println("Your score is " + player.getPlayerTotalScore());
-				//StdOut.println(roundChips);
 				
 			}
 			
