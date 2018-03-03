@@ -41,6 +41,7 @@ public class SkunkPlayer
 	public void totalScoreVoid()
 	{
 		playerTotalScore = 0;
+		playerRoundScore = 0;
 	}
 	
 	

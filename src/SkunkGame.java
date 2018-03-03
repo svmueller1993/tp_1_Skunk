@@ -65,10 +65,26 @@ public class SkunkGame
 		roundWinner.setRoundWins(roundWinner.getRoundWins() + 1);
 		
 	}
-
+	
+	/**
+	 * Starts game with entering player info.
+	 */
+	public void startGame() {
+		setUpPlayers();
+		playGame();
+	}
+	
+	/**
+	 * Starts game with given list of players
+	 * @param listOfPlayers
+	 */
+	public void startGame(List<SkunkPlayer> listOfPlayers) {
+		players = listOfPlayers;
+		playGame();
+	}
+	
 	public void playGame()
 	{
-		setUpPlayers();
 		StdOut.println("\nWould you like to read the rules of the game?(y/n)");
 		String a = StdIn.readString();
 		if(a.equals("y"))//Part of assignment 3 - option to print out instructions
@@ -77,7 +93,7 @@ public class SkunkGame
 		+ "the points on the two dice. The player has the privilege of continuing to shake to increase his score or of passing the dice to wait for \n"
 		+ "the next series, thus preventing the possibility of rolling a Skunk and losing his score.\n"
 		+ "Any number of players can play,The suggested number of chips to start is 50 \n"
-		+ "The winner of each game collects all chips in \"kitty\" and in addition ﬁve chips from each losing player or 10 chips from any player without a score. \n"
+		+ "The winner of each game collects all chips in \"kitty\" and in addition ï¬�ve chips from each losing player or 10 chips from any player without a score. \n"
 		+ "The first player to accumulate a total of 100 or more points can continue to score as many points over 100 as he believes is needed to win.\n"
 		+ "When he decides to stop, his total score is the \"goal.\" Each succeeding player receives one more chance to better the goal and end the game.\n"
 		+ "\nPENALTIES: A skunk in any series voids the score for that series only and draws a penalty of 1 chip placed in the \"kitty,\" and loss of dice.\n"
@@ -192,6 +208,6 @@ public class SkunkGame
 		SkunkDie d1 = new SkunkDie();
 		SkunkDie d2 = new SkunkDie();
 		SkunkGame s = new SkunkGame(d1, d2);
-		s.playGame();
+		s.startGame();
 	}
 }
