@@ -10,18 +10,7 @@ class SkunkGameTest
 	public void setUp() throws Exception
 	{
 	}
-	
-	
-	@Test
-	void testSetUpPlayers()
-	{
-		SkunkDie d1 = new SkunkDie();
-		SkunkDie d2 = new SkunkDie();
-		SkunkGame s = new SkunkGame(d1,d2);
-		s.setUpPlayers();
-		assertTrue(s.players.size() == 2);//as long as user enters 2 when prompted
-		
-	}
+
 	
 
 }
