@@ -20,6 +20,15 @@ public class PreProgrammedSkunkDie extends SkunkDie
 		predefinedValues.add(6);
 		predefinedRoll = -1;
 	}
+	
+	public PreProgrammedSkunkDie(Integer[] values)
+	{
+		for (int i = 0; i < values.length; i++)
+		{
+			predefinedValues.add(values[i]);
+		}
+		predefinedRoll = -1;
+	}
 
 	@Override
 	public void roll()
