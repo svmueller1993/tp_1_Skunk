@@ -17,11 +17,13 @@ public class SkunkApp
 		SkunkDie d2 = new SkunkDie();
 
 		List<SkunkPlayer> players = new ArrayList<SkunkPlayer>();
-		players.add(new SkunkPlayer("PlayerOne"));
-		players.add(new SkunkPlayer("PlayerTwo"));
+		players.add(new SkunkPlayer("Player One"));
+		players.add(new SkunkPlayer("Player Two"));
 
 		SkunkGame game = new SkunkGame(d1, d2, players);
 
+		StdOut.println("There are " + players.size() + " players playing:");
+		game.printAllPlayerNames();
 		StdOut.println("\nWould you like to read the rules of the game?(y/n)");
 		String a = StdIn.readString();
 		// Part of assignment 3 - option to print out instructions
@@ -75,6 +77,7 @@ public class SkunkApp
 			StdOut.println("The round winner is: " + roundWinner.getPlayerName() + " with a round score of "
 					+ roundWinner.getRoundScore() + " and has recieved " + game.getRoundChips()
 					+ " chips for a total of " + roundWinner.getChips() + " chips!");
+			game.setRoundChips(0);
 			roundNumber++;
 		}
 

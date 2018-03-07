@@ -69,6 +69,14 @@ public class SkunkGame
 		return players.get(winner);
 	}
 	
+	public void printAllPlayerNames()
+	{
+		for(int i = 0; i < players.size(); i++)
+		{
+			StdOut.println(players.get(i).getPlayerName());
+		}
+	}
+	
 	public boolean playGameForOnePlayer(SkunkPlayer player)
 	{
 		
