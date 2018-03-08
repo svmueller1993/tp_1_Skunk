@@ -113,15 +113,18 @@ public class SkunkGame
 				StdOut.println("You rolled one skunks, next player will take turn." + " You have " + player.getChips() + " chips left");
 				roundChips ++;
 			}
+			
 			player.setRoundScore(0);
 			finishRound(player);
 			return false;
 		}
+		
 		else
 		{
 			player.setRoundScore(player.getRoundScore() + rollScore);
 			
 			StdOut.println("Your total score is " + player.getCurrentScore());
+		
 		}
 		return true;
 	}

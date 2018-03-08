@@ -51,6 +51,7 @@ public class SkunkApp
 					if (d.equals("n"))
 					{
 						// next player will take turn
+						skunkPlayer.setLastRoundScore(skunkPlayer.getRoundScore());
 						game.finishRound(skunkPlayer);
 						break;
 					}
@@ -71,10 +72,8 @@ public class SkunkApp
 			}
 			SkunkPlayer roundWinner = game.getRoundWinner();
 			roundWinner.setChips(roundWinner.getChips() + game.getRoundChips());
-			// adding chips taken from players who rolled skunk and giving it to
-			// the player with the highest round score
 			StdOut.println("The round winner is: " + roundWinner.getName() + " with a round score of "
-					+ roundWinner.getRoundScore() + " and has recieved " + game.getRoundChips()
+					+ roundWinner.getLastRoundScore() + " and has recieved " + game.getRoundChips()
 					+ " chips for a total of " + roundWinner.getChips() + " chips!");
 			game.setRoundChips(0);
 			roundNumber++;
