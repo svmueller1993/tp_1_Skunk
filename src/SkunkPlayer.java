@@ -7,118 +7,73 @@
 public class SkunkPlayer 
 {
 	
-	private String playerName;
-	private int playerTotalScore;
-	private int playerRollScore;
-	private int playerRoundScore;
-	private int Chips;
-	private boolean standing;
-	private int roundWins;
-	
+	private String name;
+	private int totalScore;
+	private int roundScore;
+	private int lastRoundScore;
+	private int chips;
 	
 	public SkunkPlayer(String name)
 	{
-		playerName = name;
-		playerTotalScore = 0;
-		Chips = 50; 
-		
+		this.name = name;
+		this.totalScore = 0;
+		this.chips = 50; 
 	}
-	
-	
-	/**
-	 * Adds round points to total score
-	 * @param numberOfRoundPoints
-	 */
-	public void addPoints(int numberOfRollPoints)
+
+	public String getName()
 	{
-		playerRollScore = numberOfRollPoints;
-		playerTotalScore += playerRollScore;
+		return name;
 	}
-	
-	/*
-	 * Voids the players total score when two skunks rolled
-	 */
-	public void totalScoreVoid()
+
+	public void setName(String name)
 	{
-		playerTotalScore = 0;
-		playerRoundScore = 0;
+		this.name = name;
 	}
 	
-	
-	public void setTotalScore(int score)
+	public int getCurrentScore()
 	{
-		playerTotalScore = score;
+		return totalScore + roundScore;
 	}
-	/*
-	 * getter for players round score
-	 */
+
+	public int getTotalScore()
+	{
+		return totalScore;
+	}
+
+	public void setTotalScore(int totalScore)
+	{
+		this.totalScore = totalScore;
+	}
+
 	public int getRoundScore()
 	{
-		return playerRoundScore;
+		return roundScore;
 	}
-	/*
-	 * Setter for round score
-	 */
-	public void setRoundScore(int score)
+
+	public void setRoundScore(int roundScore)
 	{
-		playerRoundScore = score;
+		this.roundScore = roundScore;
 	}
-	/*
-	 * Setter for if the player is standing or not
-	 */
-	public void setStanding(boolean a)
-	{
-		standing = a;
-	}
-	
-	/*
-	 * returns whether or not the player is standing
-	 */
-	public boolean getStanding()
-	{
-		return standing;
-	}
-	
-	/*
-	 * Getter for player name
-	 */
-	public String getPlayerName()
-	{
-		return playerName;
-	}
-	
-	/*
-	 * Getter for players total score
-	 */
-	public int getPlayerTotalScore()
-	{
-		return playerTotalScore;
-	}
-	
-	/*
-	 * Getter for players amount of white chips
-	 */
+
 	public int getChips()
 	{
-		return Chips;
+		return chips;
+	}
+
+	public void setChips(int chips)
+	{
+		this.chips = chips;
+	}
+
+	public int getLastRoundScore()
+	{
+		return lastRoundScore;
+	}
+
+	public void setLastRoundScore(int lastRoundScore)
+	{
+		this.lastRoundScore = lastRoundScore;
 	}
 	
-	/*
-	 * Setter for chips
-	 */
-	public void setChips(int num)
-	{
-		Chips = num;
-	}
-	
-	public void setRoundWins(int num)
-	{
-		roundWins = num;
-	}
-	
-	public int getRoundWins()
-	{
-		return roundWins;
-	}
 	
 }

@@ -40,9 +40,8 @@ public class SkunkApp
 			for (Iterator<SkunkPlayer> iterator = players.iterator(); iterator.hasNext();)
 			{
 				SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
-				StdOut.println("Player name : " + skunkPlayer.getPlayerName());
-				StdOut.println("Your total score is: " + skunkPlayer.getPlayerTotalScore()
-						+ ". Your total number of round wins are: " + skunkPlayer.getRoundWins());
+				StdOut.println("Player name : " + skunkPlayer.getName());
+				StdOut.println("Your total score is: " + skunkPlayer.getCurrentScore());
 
 				boolean continueGame = true;
 				while (continueGame)
@@ -51,22 +50,22 @@ public class SkunkApp
 					String d = StdIn.readString();
 					if (d.equals("n"))
 					{
-						game.setRoundScore(0);
 						// next player will take turn
+						game.finishRound(skunkPlayer);
 						break;
 					}
-					continueGame = game.playGameForOnePlayer(skunkPlayer);
+					continueGame = game.playGameForOneRound(skunkPlayer);
 
-					if (skunkPlayer.getPlayerTotalScore() >= 100)
+					if (skunkPlayer.getCurrentScore() >= 100)
 					{
 						StdOut.println("==================================================");
-						StdOut.println("Player total score : " + skunkPlayer.getPlayerTotalScore());
+						StdOut.println("Player total score : " + skunkPlayer.getCurrentScore());
 						StdOut.println("Your score is more than 100.");
-						StdOut.println("The game winner is " + skunkPlayer.getPlayerName());
+						StdOut.println("The game winner is " + skunkPlayer.getName());
 						System.exit(0);
 					}
 				}
-				StdOut.println("Player total score : " + skunkPlayer.getPlayerTotalScore());
+				StdOut.println("Player total score : " + skunkPlayer.getCurrentScore());
 				StdOut.println("--------------------------------------------------");
 
 			}
@@ -74,7 +73,7 @@ public class SkunkApp
 			roundWinner.setChips(roundWinner.getChips() + game.getRoundChips());
 			// adding chips taken from players who rolled skunk and giving it to
 			// the player with the highest round score
-			StdOut.println("The round winner is: " + roundWinner.getPlayerName() + " with a round score of "
+			StdOut.println("The round winner is: " + roundWinner.getName() + " with a round score of "
 					+ roundWinner.getRoundScore() + " and has recieved " + game.getRoundChips()
 					+ " chips for a total of " + roundWinner.getChips() + " chips!");
 			game.setRoundChips(0);
@@ -83,8 +82,8 @@ public class SkunkApp
 
 		SkunkPlayer winner = game.getGameWinner();
 		StdOut.println("==================================================");
-		StdOut.println("The game winner is " + winner.getPlayerName());
-		StdOut.println("Total score : " + winner.getPlayerTotalScore());
+		StdOut.println("The game winner is " + winner.getName());
+		StdOut.println("Total score : " + winner.getCurrentScore());
 
 	}
 

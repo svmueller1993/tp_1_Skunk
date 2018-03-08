@@ -14,8 +14,6 @@ public class SkunkGame
 	SkunkDie die2;
 	int numberOfPlayers;
 	int roundNumber;
-	int rollScore;
-	int roundScore;
 	int roundChips;
 	
 	SkunkPlayer roundWinner;
@@ -29,40 +27,41 @@ public class SkunkGame
 		this.players = players;
 	}
 
-	/*
+	/**
 	 * Finds the winner of each round in order to give the winner the round chips
+	 * @return returns winner of round
 	 */
 	public SkunkPlayer getRoundWinner()
 	{
 		int winner = 0;
-		int maxScore = players.get(0).getRoundScore();
+		int maxScore = players.get(0).getLastRoundScore();
 		for (int i = 1; i < players.size(); i++)
 		{
-			if(maxScore < players.get(i).getRoundScore()) 
+			if(maxScore < players.get(i).getLastRoundScore()) 
 			{
 				winner = i;
-				maxScore = players.get(i).getRoundScore();
+				maxScore = players.get(i).getLastRoundScore();
 			}
 		}
 		
 		roundWinner = players.get(winner);
-		roundWinner.setRoundWins(roundWinner.getRoundWins() + 1);
 		return roundWinner;
 	}
 	
-	/*
+	/**
 	 * Finds game winner
+	 * @return
 	 */
 	public SkunkPlayer getGameWinner()
 	{
 		int winner = 0;
-		int maxScore = players.get(0).getPlayerTotalScore();
+		int maxScore = players.get(0).getTotalScore();
 		for (int i = 1; i < players.size(); i++)
 		{
-			if(maxScore < players.get(i).getPlayerTotalScore()) 
+			if(maxScore < players.get(i).getTotalScore()) 
 			{
 				winner = i;
-				maxScore = players.get(i).getPlayerTotalScore();
+				maxScore = players.get(i).getTotalScore();
 			}
 		}
 		
@@ -73,11 +72,16 @@ public class SkunkGame
 	{
 		for(int i = 0; i < players.size(); i++)
 		{
-			StdOut.println(players.get(i).getPlayerName());
+			StdOut.println(players.get(i).getName());
 		}
 	}
 	
-	public boolean playGameForOnePlayer(SkunkPlayer player)
+	/**
+	 * Plays one round for given player.
+	 * @param player given player
+	 * @return returns true if user can continue play, otherwise false
+	 */
+	public boolean playGameForOneRound(SkunkPlayer player)
 	{
 		
 		this.dice.roll();
@@ -87,48 +91,56 @@ public class SkunkGame
 		
 		if (rollScore == 2) // Means both dice rolled a 1 which voids all points
 		{
-			player.totalScoreVoid();
+			player.setTotalScore(0);
 			player.setChips(player.getChips() - 4);
 			StdOut.println("You rolled two skunks, all scores have been set back to 0." + " You have " + player.getChips() + " chips left");
-			roundScore = 0;
-			player.setRoundScore(roundScore);
+			player.setRoundScore(0);
 			roundChips = roundChips + 4;
+			finishRound(player);
 			return false;
 		} 
 		else if (dice.getLastRoll1() == 1 || dice.getLastRoll2() == 1) // next player will take turn and voids players round score
 		{
-			if(rollScore ==3) //rolling a skunk and a "Deuce, needs to be in this if statement because if they roll a 2 and a 1 it goes to both statements and removes chips from both
+			if (rollScore == 3) //rolling a skunk and a "Deuce, needs to be in this if statement because if they roll a 2 and a 1 it goes to both statements and removes chips from both
 			{
-				player.setTotalScore(player.getPlayerTotalScore() - roundScore);
 				player.setChips(player.getChips() - 2);
 				StdOut.println("You rolled one skunk and a duece, next player will take turn." + " You have " + player.getChips() + " chips left");
-				roundScore = 0;
-				player.setRoundScore(roundScore);
 				roundChips = roundChips + 2;
-				return false;
 			}
 			else 
 			{
-				player.setTotalScore(player.getPlayerTotalScore() - roundScore);
 				player.setChips(player.getChips() - 1);
 				StdOut.println("You rolled one skunks, next player will take turn." + " You have " + player.getChips() + " chips left");
-				roundScore = 0;
-				player.setRoundScore(roundScore);
 				roundChips ++;
-				return false;
 			}
+			player.setRoundScore(0);
+			finishRound(player);
+			return false;
 		}
 		else
 		{
-			roundScore += rollScore;
-			player.setRoundScore(roundScore);
-			player.addPoints(rollScore);
+			player.setRoundScore(player.getRoundScore() + rollScore);
 			
-			StdOut.println("Your total score is " + player.getPlayerTotalScore());
+			StdOut.println("Your total score is " + player.getCurrentScore());
 		}
 		return true;
 	}
 	
+	/**
+	 * Finishes current round for given player.
+	 * @param player given player
+	 */
+	public void finishRound(SkunkPlayer player) {
+		int roundScore = player.getRoundScore();
+		player.setTotalScore(player.getTotalScore() + roundScore);
+		player.setRoundScore(0);
+		player.setLastRoundScore(roundScore);
+	}
+	
+	/**
+	 * Returns game instructions.
+	 * @return game instructions
+	 */
 	public String getGameInstructions() 
 	{
 		return "The objective of the game is to accumulate a score of 100 points or more. A score is made by rolling the dice and combining \n"
@@ -143,16 +155,6 @@ public class SkunkGame
 				+ "TWO skunks void the ENTIRE accumulated score and draws a penalty of 4 chips placed in the \"kitty,\" and loss of dice.\nPlayer must again start to score from scratch.\n";
 	}
 	
-	public int getRoundScore()
-	{
-		return roundScore;
-	}
-
-	public void setRoundScore(int roundScore)
-	{
-		this.roundScore = roundScore;
-	}
-
 	public int getRoundChips()
 	{
 		return roundChips;

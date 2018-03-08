@@ -20,35 +20,12 @@ public class SkunkPlayerTest
 		assertNotNull(p);
 	}
 	
-	
-	
-	@Test
-	public void testAddPoints()
-	{
-		SkunkPlayer p = new SkunkPlayer("Test Player");
-		p.addPoints(4);
-		int points = p.getPlayerTotalScore();
-		assertTrue(points == 4);
-		
-	}
-	
-	@Test
-	public void testTotalScoreVoid()
-	{
-		SkunkPlayer p = new SkunkPlayer("Test Player");
-		p.addPoints(5);
-		p.addPoints(6);
-		p.totalScoreVoid();
-		int points = p.getPlayerTotalScore();
-		assertTrue(points == 0);
-	}
-	
 	@Test
 	public void testSetTotalScore()
 	{
 		SkunkPlayer p = new SkunkPlayer("Test Player");
 		p.setTotalScore(10);
-		int points = p.getPlayerTotalScore();
+		int points = p.getTotalScore();
 		assertTrue(points == 10);
 	}
 	
@@ -65,7 +42,7 @@ public class SkunkPlayerTest
 	{
 		String name = "Test Player";
 		SkunkPlayer p = new SkunkPlayer(name);
-		assertTrue(p.getPlayerName() == name);
+		assertTrue(p.getName() == name);
 	}
 	
 	@Test
@@ -76,12 +53,5 @@ public class SkunkPlayerTest
 		assertTrue(p.getChips() == 55);
 	}
 	
-	@Test
-	public void testGetRoundWinsSetRoundWins()
-	{
-		SkunkPlayer p = new SkunkPlayer("Test Player");
-		p.setRoundWins(3);
-		assertTrue(p.getRoundWins() == 3);
-	}
 }
 
