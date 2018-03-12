@@ -15,7 +15,6 @@ public class SkunkApp
 	{
 		SkunkDie d1 = new SkunkDie();
 		SkunkDie d2 = new SkunkDie();
-
 		List<SkunkPlayer> players = new ArrayList<SkunkPlayer>();
 		
 		StdOut.println("How many players would like to play? You may have up to 8 players.");
@@ -76,12 +75,32 @@ public class SkunkApp
 				StdOut.println("--------------------------------------------------");
 
 			}
+			boolean temp = game.checkForTie();
+			if(temp == false)
+			{
 			SkunkPlayer roundWinner = game.getRoundWinner();
 			roundWinner.setChips(roundWinner.getChips() + game.getRoundChips());
 			StdOut.println("The round winner is: " + roundWinner.getName() + " with a round score of "
 					+ roundWinner.getLastRoundScore() + " and has recieved " + game.getRoundChips()
 					+ " chips for a total of " + roundWinner.getChips() + " chips!");
 			game.setRoundChips(0);
+			}
+			
+			
+			if(temp == true)
+			{
+				StdOut.println("There are " + game.roundTies.size() + " winners this round: " + " with a score of " + game.roundTies.get(0).getLastRoundScore() + ".");
+				StdOut.println("Each player will recieve " + game.getRoundChips()/(game.roundTies.size()) +  " chips.");
+				for (int i = 0; i < game.roundTies.size(); i++)
+				{
+					game.roundTies.get(i).setChips(game.roundTies.get(i).getChips() + game.getRoundChips()/(game.roundTies.size()));
+					StdOut.println(game.roundTies.get(i).getName() + " now has a total of " + game.roundTies.get(i).getChips() + " chips");
+				}
+				
+				game.setRoundChips(0);
+			}
+			
+			
 			roundNumber++;
 		}
 

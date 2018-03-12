@@ -18,6 +18,7 @@ public class SkunkGame
 	
 	SkunkPlayer roundWinner;
 	List<SkunkPlayer> players = new ArrayList<SkunkPlayer>();
+	ArrayList <SkunkPlayer> roundTies = new ArrayList <SkunkPlayer>();
 
 	public SkunkGame(SkunkDie pDie1, SkunkDie pDie2, List<SkunkPlayer> players)
 	{
@@ -27,10 +28,42 @@ public class SkunkGame
 		this.players = players;
 	}
 
-	public void setUpPlayers(int num)
+	/*
+	 * Checks for round ties to split up chips
+	 */
+	public boolean checkForTie()
 	{
+		roundTies.clear();
+		int maxScore = players.get(0).getLastRoundScore();
+		for (int i = 1; i < players.size(); i++)
+		{
+			if(maxScore < players.get(i).getLastRoundScore()) 
+			{
+				maxScore = players.get(i).getLastRoundScore();
+			}
+		}
+		
+		
+		for (int i = 0; i < players.size(); i++)
+		{
+			if (players.get(i).getLastRoundScore() == maxScore)
+			{
+				roundTies.add(players.get(i));
+			}
+		}
+		
+		if(roundTies.size() > 1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 		
 	}
+	
+	
 	/**
 	 * Finds the winner of each round in order to give the winner the round chips
 	 * @return returns winner of round
@@ -137,7 +170,8 @@ public class SkunkGame
 	 * Finishes current round for given player.
 	 * @param player given player
 	 */
-	public void finishRound(SkunkPlayer player) {
+	public void finishRound(SkunkPlayer player)
+	{
 		int roundScore = player.getRoundScore();
 		player.setTotalScore(player.getTotalScore() + roundScore);
 		player.setRoundScore(0);
