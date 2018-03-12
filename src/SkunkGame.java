@@ -27,6 +27,10 @@ public class SkunkGame
 		this.players = players;
 	}
 
+	public void setUpPlayers(int num)
+	{
+		
+	}
 	/**
 	 * Finds the winner of each round in order to give the winner the round chips
 	 * @return returns winner of round

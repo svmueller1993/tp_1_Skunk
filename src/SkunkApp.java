@@ -17,11 +17,17 @@ public class SkunkApp
 		SkunkDie d2 = new SkunkDie();
 
 		List<SkunkPlayer> players = new ArrayList<SkunkPlayer>();
-		players.add(new SkunkPlayer("Player One"));
-		players.add(new SkunkPlayer("Player Two"));
+		
+		StdOut.println("How many players would like to play? You may have up to 8 players.");
+		int num = StdIn.readInt();
+		for(int i = 0; i < num; i++)
+		{
+			StdOut.println("Enter the name of player " + (i+ 1));
+			String name = StdIn.readString();
+			players.add(new SkunkPlayer(name));
+		}
 
 		SkunkGame game = new SkunkGame(d1, d2, players);
-
 		StdOut.println("There are " + players.size() + " players playing:");
 		game.printAllPlayerNames();
 		StdOut.println("\nWould you like to read the rules of the game?(y/n)");
