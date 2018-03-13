@@ -16,12 +16,12 @@ public class SkunkApp
 		SkunkDie d1 = new SkunkDie();
 		SkunkDie d2 = new SkunkDie();
 		List<SkunkPlayer> players = new ArrayList<SkunkPlayer>();
-		
-		StdOut.println("How many players would like to play? You may have up to 8 players.");
+
+		StdOut.println("You may have up to 8 players. How many players would like to play? ");
 		int num = StdIn.readInt();
-		for(int i = 0; i < num; i++)
+		for (int i = 0; i < num; i++)
 		{
-			StdOut.println("Enter the name of player " + (i+ 1));
+			StdOut.println("Enter the name of player: " + (i + 1));
 			String name = StdIn.readString();
 			players.add(new SkunkPlayer(name));
 		}
@@ -37,77 +37,78 @@ public class SkunkApp
 			StdOut.println(game.getGameInstructions());
 		}
 
-		int roundNumber = 0;
-		while (roundNumber < 6)
+		do
 		{
-			StdOut.println("====================================================");
-			StdOut.println("Game round : " + (roundNumber + 1));
-			for (Iterator<SkunkPlayer> iterator = players.iterator(); iterator.hasNext();)
+			int roundNumber = 0;
+			while (roundNumber < 6)
 			{
-				SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
-				StdOut.println("Player name : " + skunkPlayer.getName());
-				StdOut.println("Your total score is: " + skunkPlayer.getCurrentScore());
-
-				boolean continueGame = true;
-				while (continueGame)
+				StdOut.println("====================================================");
+				StdOut.println("Game round: " + (roundNumber + 1));
+				for (Iterator<SkunkPlayer> iterator = players.iterator(); iterator.hasNext();)
 				{
-					StdOut.println("\nWould you like to roll the dice(y/n)?");
-					String d = StdIn.readString();
-					if (d.equals("n"))
-					{
-						// next player will take turn
-						skunkPlayer.setLastRoundScore(skunkPlayer.getRoundScore());
-						game.finishRound(skunkPlayer);
-						break;
-					}
-					continueGame = game.playGameForOneRound(skunkPlayer);
+					SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
+					StdOut.println("Player name: " + skunkPlayer.getName());
+					StdOut.println("Your total score is: " + skunkPlayer.getCurrentScore());
+					StdOut.println("Your total chips is: " + skunkPlayer.getChips());
 
-					if (skunkPlayer.getCurrentScore() >= 100)
+					boolean continueGame = true;
+					while (continueGame)
 					{
-						StdOut.println("==================================================");
-						StdOut.println("Player total score : " + skunkPlayer.getCurrentScore());
-						StdOut.println("Your score is more than 100.");
-						StdOut.println("The game winner is " + skunkPlayer.getName());
-						System.exit(0);
-					}
-				}
-				StdOut.println("Player total score : " + skunkPlayer.getCurrentScore());
-				StdOut.println("--------------------------------------------------");
+						StdOut.println("\nWould you like to roll the dice(y/n)?");
+						String d = StdIn.readString();
+						if (d.equals("n"))
+						{
+							// next player will take turn
+							skunkPlayer.setLastRoundScore(skunkPlayer.getRoundScore());
+							game.finishRound(skunkPlayer);
+							break;
+						}
+						continueGame = game.playGameForOneRound(skunkPlayer);
 
-			}
-			boolean temp = game.checkForTie();
-			if(temp == false)
-			{
-			SkunkPlayer roundWinner = game.getRoundWinner();
-			roundWinner.setChips(roundWinner.getChips() + game.getRoundChips());
-			StdOut.println("The round winner is: " + roundWinner.getName() + " with a round score of "
-					+ roundWinner.getLastRoundScore() + " and has recieved " + game.getRoundChips()
-					+ " chips for a total of " + roundWinner.getChips() + " chips!");
-			game.setRoundChips(0);
-			}
-			
-			
-			if(temp == true)
-			{
-				StdOut.println("There are " + game.roundTies.size() + " winners this round: " + " with a score of " + game.roundTies.get(0).getLastRoundScore() + ".");
-				StdOut.println("Each player will recieve " + game.getRoundChips()/(game.roundTies.size()) +  " chips.");
-				for (int i = 0; i < game.roundTies.size(); i++)
-				{
-					game.roundTies.get(i).setChips(game.roundTies.get(i).getChips() + game.getRoundChips()/(game.roundTies.size()));
-					StdOut.println(game.roundTies.get(i).getName() + " now has a total of " + game.roundTies.get(i).getChips() + " chips");
+						if (skunkPlayer.getCurrentScore() >= 100)
+						{
+							StdOut.println("==================================================");
+							StdOut.println("Player total score is: " + skunkPlayer.getCurrentScore());
+							StdOut.println("Your score is more than 100.");
+							StdOut.println("The round winner is: " + skunkPlayer.getName());
+							skunkPlayer.setLastRoundScore(skunkPlayer.getRoundScore());
+							game.finishRound(skunkPlayer);
+							break;
+						}
+					}
+					StdOut.println("Player total score is: " + skunkPlayer.getCurrentScore());
+					StdOut.println("Player total chips is: " + skunkPlayer.getChips());
+					StdOut.println("Total chips in the kitty: " + game.getRoundChips());
+					StdOut.println("--------------------------------------------------");
+
 				}
-				
-				game.setRoundChips(0);
+
+				roundNumber++;
 			}
 			
-			
-			roundNumber++;
+			game.collectChips();
+			StdOut.println(game.displayChipNumbers());
+
+			StdOut.println("\nWould you like to play another game?(y/n)");
+			String y = StdIn.readString();
+			// Part of assignment 3 - option to print out instructions
+			if (y.equals("y"))
+			{
+				continue;
+			}
+			else
+			{
+				break;
+			}
+
 		}
+		while (true);
 
 		SkunkPlayer winner = game.getGameWinner();
 		StdOut.println("==================================================");
-		StdOut.println("The game winner is " + winner.getName());
-		StdOut.println("Total score : " + winner.getCurrentScore());
+		StdOut.println("The game winner is: " + winner.getName());
+		StdOut.println("Total score is: " + winner.getTotalScore());
+		StdOut.println("Total chips are: " + winner.getChips());
 
 	}
 

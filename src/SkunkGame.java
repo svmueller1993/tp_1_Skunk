@@ -18,7 +18,6 @@ public class SkunkGame
 	
 	SkunkPlayer roundWinner;
 	List<SkunkPlayer> players = new ArrayList<SkunkPlayer>();
-	ArrayList <SkunkPlayer> roundTies = new ArrayList <SkunkPlayer>();
 
 	public SkunkGame(SkunkDie pDie1, SkunkDie pDie2, List<SkunkPlayer> players)
 	{
@@ -28,60 +27,29 @@ public class SkunkGame
 		this.players = players;
 	}
 
-	/*
-	 * Checks for round ties to split up chips
-	 */
-	public boolean checkForTie()
-	{
-		roundTies.clear();
-		int maxScore = players.get(0).getLastRoundScore();
-		for (int i = 1; i < players.size(); i++)
-		{
-			if(maxScore < players.get(i).getLastRoundScore()) 
-			{
-				maxScore = players.get(i).getLastRoundScore();
-			}
-		}
-		
-		
-		for (int i = 0; i < players.size(); i++)
-		{
-			if (players.get(i).getLastRoundScore() == maxScore)
-			{
-				roundTies.add(players.get(i));
-			}
-		}
-		
-		if(roundTies.size() > 1)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-		
-	}
-	
-	
 	/**
 	 * Finds the winner of each round in order to give the winner the round chips
 	 * @return returns winner of round
 	 */
-	public SkunkPlayer getRoundWinner()
+	public List<SkunkPlayer> getRoundWinner()
 	{
-		int winner = 0;
-		int maxScore = players.get(0).getLastRoundScore();
+		int maxScore = players.get(0).getTotalScore();
 		for (int i = 1; i < players.size(); i++)
 		{
-			if(maxScore < players.get(i).getLastRoundScore()) 
+			if(maxScore < players.get(i).getTotalScore()) 
 			{
-				winner = i;
-				maxScore = players.get(i).getLastRoundScore();
+				maxScore = players.get(i).getTotalScore();
 			}
 		}
 		
-		roundWinner = players.get(winner);
+		List<SkunkPlayer> roundWinner = new ArrayList<>();
+		for (int i = 0; i < players.size(); i++)
+		{
+			if(maxScore == players.get(i).getTotalScore()) 
+			{
+				roundWinner.add(players.get(i));
+			}
+		}
 		return roundWinner;
 	}
 	
@@ -92,13 +60,13 @@ public class SkunkGame
 	public SkunkPlayer getGameWinner()
 	{
 		int winner = 0;
-		int maxScore = players.get(0).getTotalScore();
+		int maxScore = players.get(0).getChips();
 		for (int i = 1; i < players.size(); i++)
 		{
-			if(maxScore < players.get(i).getTotalScore()) 
+			if(maxScore < players.get(i).getChips()) 
 			{
 				winner = i;
-				maxScore = players.get(i).getTotalScore();
+				maxScore = players.get(i).getChips();
 			}
 		}
 		
@@ -130,7 +98,7 @@ public class SkunkGame
 		{
 			player.setTotalScore(0);
 			player.setChips(player.getChips() - 4);
-			StdOut.println("You rolled two skunks, all scores have been set back to 0." + " You have " + player.getChips() + " chips left");
+			StdOut.println("You rolled two skunks, all scores have been set back to 0." + " You have " + player.getChips() + " chips left.");
 			player.setRoundScore(0);
 			roundChips = roundChips + 4;
 			finishRound(player);
@@ -147,7 +115,7 @@ public class SkunkGame
 			else 
 			{
 				player.setChips(player.getChips() - 1);
-				StdOut.println("You rolled one skunks, next player will take turn." + " You have " + player.getChips() + " chips left");
+				StdOut.println("You rolled one skunks, next player will take turn." + " You have " + player.getChips() + " chips left.");
 				roundChips ++;
 			}
 			
@@ -160,7 +128,7 @@ public class SkunkGame
 		{
 			player.setRoundScore(player.getRoundScore() + rollScore);
 			
-			StdOut.println("Your total score is " + player.getCurrentScore());
+			StdOut.println("Your total score is: " + player.getCurrentScore());
 		
 		}
 		return true;
@@ -204,6 +172,48 @@ public class SkunkGame
 	public void setRoundChips(int roundChips)
 	{
 		this.roundChips = roundChips;
+	}
+
+	public void collectChips()
+	{
+		List<SkunkPlayer> list = getRoundWinner();
+		
+		for (int i = 0; i < players.size(); i++)
+		{
+			SkunkPlayer p = players.get(i);
+			if (!list.contains(p)) {
+				// collect chips
+				int k = 0;
+				if (p.getLastRoundScore() == 0) {
+					// collect 10 chips
+					k = 10;
+				} else {
+					// collect 5 chips
+					k = 5;
+				}
+				p.setChips(p.getChips() - k);
+				roundChips = roundChips + k;
+			}
+		}
+		
+		for (int i = 0; i < list.size(); i++)
+		{
+			SkunkPlayer p = list.get(i);
+			p.setChips(p.getChips() + roundChips / list.size());
+		}
+		roundChips = 0;		
+	}
+
+	public String displayChipNumbers()
+	{
+		String str = "\n";
+		for (int i = 0; i < players.size(); i++) 
+		{	
+			SkunkPlayer p = players.get(i);
+			str = str + "\n" + p.getName() + ", total score:" + p.getTotalScore()
+			+ ", chips:" + p.getChips();
+		}
+		return str;
 	}
 	
 }
