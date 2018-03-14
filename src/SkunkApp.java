@@ -82,7 +82,7 @@ public class SkunkApp
 						}
 					}
 					StdOut.println("Your turn is finished, " + skunkPlayer.getName()
-							+ " (score: "+ skunkPlayer.getCurrentScore() +", chips: "+ skunkPlayer.getChips() +")");
+							+ " (total score: "+ skunkPlayer.getCurrentScore() + ", round score: " + skunkPlayer.getLastRoundScore() + ", chips: "+ skunkPlayer.getChips() +")");
 					StdOut.println("Total chips in the kitty: " + game.getRoundChips());
 					StdOut.println("===================================================");
 
@@ -118,7 +118,7 @@ public class SkunkApp
 				}
 			}
 
-			StdOut.println("\nWould you like to continue play game?(y/n)");
+			StdOut.println("\nWould you like to continue to play the game?(y/n)");
 			String y = StdIn.readString();
 			// Part of assignment 3 - option to print out instructions
 			if (y.equals("y"))

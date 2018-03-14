@@ -34,19 +34,19 @@ public class SkunkGame
 	 */
 	public List<SkunkPlayer> getRoundWinner()
 	{
-		int maxScore = players.get(0).getTotalScore();
+		int maxScore = players.get(0).getLastRoundScore();
 		for (int i = 1; i < players.size(); i++)
 		{
-			if(maxScore < players.get(i).getTotalScore()) 
+			if(maxScore < players.get(i).getLastRoundScore()) 
 			{
-				maxScore = players.get(i).getTotalScore();
+				maxScore = players.get(i).getRoundScore();
 			}
 		}
 		
 		List<SkunkPlayer> roundWinner = new ArrayList<>();
 		for (int i = 0; i < players.size(); i++)
 		{
-			if(maxScore == players.get(i).getTotalScore()) 
+			if(maxScore == players.get(i).getLastRoundScore()) 
 			{
 				roundWinner.add(players.get(i));
 			}
