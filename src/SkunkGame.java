@@ -28,8 +28,9 @@ public class SkunkGame
 	}
 
 	/**
-	 * Finds the winner of each round in order to give the winner the round chips
-	 * @return returns winner of round
+	 * Finds the winners of each round in order to give the winner the round chips.
+	 * Players with same score will be in tie.
+	 * @return returns list of winners
 	 */
 	public List<SkunkPlayer> getRoundWinner()
 	{
@@ -54,31 +55,31 @@ public class SkunkGame
 	}
 	
 	/**
-	 * Finds game winner
-	 * @return
+	 * Finds game winner by comparing number of chips.
+	 * Players with same chips will be in tie.
+	 * @return list of game winners
 	 */
-	public SkunkPlayer getGameWinner()
+	public List<SkunkPlayer> getGameWinner()
 	{
-		int winner = 0;
 		int maxScore = players.get(0).getChips();
 		for (int i = 1; i < players.size(); i++)
 		{
 			if(maxScore < players.get(i).getChips()) 
 			{
-				winner = i;
 				maxScore = players.get(i).getChips();
 			}
 		}
 		
-		return players.get(winner);
-	}
-	
-	public void printAllPlayerNames()
-	{
-		for(int i = 0; i < players.size(); i++)
+		List<SkunkPlayer> gameWinner = new ArrayList<>();
+		for (int i = 0; i < players.size(); i++)
 		{
-			StdOut.println(players.get(i).getName());
+			if(maxScore == players.get(i).getChips()) 
+			{
+				gameWinner.add(players.get(i));
+			}
 		}
+		
+		return gameWinner;
 	}
 	
 	/**
@@ -174,6 +175,9 @@ public class SkunkGame
 		this.roundChips = roundChips;
 	}
 
+	/**
+	 * At the end of each game, collect chips and distribute to game winners.
+	 */
 	public void collectChips()
 	{
 		List<SkunkPlayer> list = getRoundWinner();
@@ -184,7 +188,7 @@ public class SkunkGame
 			if (!list.contains(p)) {
 				// collect chips
 				int k = 0;
-				if (p.getLastRoundScore() == 0) {
+				if (p.getTotalScore() == 0) {
 					// collect 10 chips
 					k = 10;
 				} else {
@@ -201,12 +205,12 @@ public class SkunkGame
 			SkunkPlayer p = list.get(i);
 			p.setChips(p.getChips() + roundChips / list.size());
 		}
-		roundChips = 0;		
+		roundChips = roundChips % list.size();		
 	}
 
 	public String displayChipNumbers()
 	{
-		String str = "\n";
+		String str = "";
 		for (int i = 0; i < players.size(); i++) 
 		{	
 			SkunkPlayer p = players.get(i);

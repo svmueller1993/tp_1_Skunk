@@ -3,10 +3,8 @@
  * @author saramueller
  *
  */
-
 public class SkunkPlayer 
 {
-	
 	private String name;
 	private int totalScore;
 	private int roundScore;
@@ -75,5 +73,15 @@ public class SkunkPlayer
 		this.lastRoundScore = lastRoundScore;
 	}
 	
+	public void clearScores() {
+		totalScore = 0;
+		roundScore = 0;
+		lastRoundScore = 0;
+	}
 	
+	@Override
+	public String toString()
+	{
+		return "Name: " + name + ", score: " + totalScore + ", chips: " +chips;
+	}
 }
