@@ -54,6 +54,28 @@ public class SkunkGame
 		return roundWinner;
 	}
 	
+	public List <SkunkPlayer> getGameScoreWinner()
+	{
+		int maxScore = players.get(0).getTotalScore();
+		for (int i = 1; i < players.size(); i++)
+		{
+			if(maxScore < players.get(i).getTotalScore()) 
+			{
+				maxScore = players.get(i).getTotalScore();
+			}
+		}
+		
+		List<SkunkPlayer> gameWinner = new ArrayList<>();
+		for (int i = 0; i < players.size(); i++)
+		{
+			if(maxScore == players.get(i).getTotalScore()) 
+			{
+				gameWinner.add(players.get(i));
+			}
+		}
+		return gameWinner;
+	}
+	
 	/**
 	 * Finds game winner by comparing number of chips.
 	 * Players with same chips will be in tie.
