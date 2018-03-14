@@ -28,8 +28,7 @@ public class SkunkGame
 	}
 
 	/**
-	 * Finds the winners of each round in order to give the winner the round chips.
-	 * Players with same score will be in tie.
+	 *
 	 * @return returns list of winners
 	 */
 	public List<SkunkPlayer> getRoundWinner()
@@ -54,6 +53,10 @@ public class SkunkGame
 		return roundWinner;
 	}
 	
+	/**
+	 * 
+	 * @return player with the highest total score
+	 */
 	public List <SkunkPlayer> getGameScoreWinner()
 	{
 		int maxScore = players.get(0).getTotalScore();

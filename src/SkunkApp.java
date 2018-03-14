@@ -109,7 +109,7 @@ public class SkunkApp
 			StdOut.println("This game is finished.");
 			StdOut.println("Collected chips.");
 			StdOut.println("This game winner:");
-			List<SkunkPlayer> list = game.getGameScoreWinner();
+			List<SkunkPlayer> list = game.getGameScoreWinner();//where the new method is
 			if (list != null) {
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
