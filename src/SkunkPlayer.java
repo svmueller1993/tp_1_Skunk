@@ -82,6 +82,6 @@ public class SkunkPlayer
 	@Override
 	public String toString()
 	{
-		return "Name: " + name + ", score: " + totalScore + ", chips: " +chips;
+		return "Name: " + name + ", total score: " + totalScore + ", round score: " + lastRoundScore + ", chips: " + chips;
 	}
 }

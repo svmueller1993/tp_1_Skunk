@@ -82,7 +82,7 @@ public class SkunkApp
 						}
 					}
 					StdOut.println("Your turn is finished, " + skunkPlayer.getName()
-							+ " (score: "+ skunkPlayer.getCurrentScore() +", chips: "+ skunkPlayer.getChips() +")");
+							+ " (Total score: "+ skunkPlayer.getCurrentScore() +", round score: " + skunkPlayer.getLastRoundScore() + ", chips: "+ skunkPlayer.getChips() +")");
 					StdOut.println("Total chips in the kitty: " + game.getRoundChips());
 					StdOut.println("===================================================");
 
@@ -109,7 +109,7 @@ public class SkunkApp
 			StdOut.println("This game is finished.");
 			StdOut.println("Collected chips.");
 			StdOut.println("This game winner:");
-			List<SkunkPlayer> list = game.getRoundWinner();
+			List<SkunkPlayer> list = game.getGameScoreWinner();
 			if (list != null) {
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
