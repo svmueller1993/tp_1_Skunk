@@ -28,36 +28,11 @@ public class SkunkGame
 	}
 
 	/**
-	 *
+	 * Finds the winners of each round in order to give the winner the round chips.
+	 * Players with same score will be in tie.
 	 * @return returns list of winners
 	 */
 	public List<SkunkPlayer> getRoundWinner()
-	{
-		int maxScore = players.get(0).getLastRoundScore();
-		for (int i = 1; i < players.size(); i++)
-		{
-			if(maxScore < players.get(i).getLastRoundScore()) 
-			{
-				maxScore = players.get(i).getRoundScore();
-			}
-		}
-		
-		List<SkunkPlayer> roundWinner = new ArrayList<>();
-		for (int i = 0; i < players.size(); i++)
-		{
-			if(maxScore == players.get(i).getLastRoundScore()) 
-			{
-				roundWinner.add(players.get(i));
-			}
-		}
-		return roundWinner;
-	}
-	
-	/**
-	 * 
-	 * @return player with the highest total score
-	 */
-	public List <SkunkPlayer> getGameScoreWinner()
 	{
 		int maxScore = players.get(0).getTotalScore();
 		for (int i = 1; i < players.size(); i++)
@@ -68,15 +43,15 @@ public class SkunkGame
 			}
 		}
 		
-		List<SkunkPlayer> gameWinner = new ArrayList<>();
+		List<SkunkPlayer> roundWinner = new ArrayList<>();
 		for (int i = 0; i < players.size(); i++)
 		{
 			if(maxScore == players.get(i).getTotalScore()) 
 			{
-				gameWinner.add(players.get(i));
+				roundWinner.add(players.get(i));
 			}
 		}
-		return gameWinner;
+		return roundWinner;
 	}
 	
 	/**
