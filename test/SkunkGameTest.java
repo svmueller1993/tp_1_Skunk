@@ -149,6 +149,24 @@ public class SkunkGameTest
 	}
 
 	@Test
+	public void test_game_winner_tie()
+	{
+		die1 = new PreProgrammedSkunkDie(new Integer[]
+		{ 6, 6 });
+		die2 = new PreProgrammedSkunkDie(new Integer[]
+		{ 6, 6 });
+		game = new SkunkGame(die1, die2, players);
+
+		game.playGameForOneRound(player1);
+		game.finishRound(player1);
+		game.playGameForOneRound(player2);
+		game.finishRound(player2);
+		game.collectChips();
+		assertTrue(game.getGameWinner().contains(player1));
+		assertTrue(game.getGameWinner().contains(player2));
+	}
+	
+	@Test
 	public void test_game_winner()
 	{
 		die1 = new PreProgrammedSkunkDie(new Integer[]
@@ -161,7 +179,9 @@ public class SkunkGameTest
 		game.finishRound(player1);
 		game.playGameForOneRound(player2);
 		game.finishRound(player2);
-		assertEquals(player2, game.getGameWinner());
+		game.collectChips();
+		assertFalse(game.getGameWinner().contains(player1));
+		assertTrue(game.getGameWinner().contains(player2));
 	}
 	
 	@Test
@@ -177,7 +197,29 @@ public class SkunkGameTest
 		game.finishRound(player1);
 		game.playGameForOneRound(player2);
 		game.finishRound(player2);
-		assertEquals(player2, game.getRoundWinner());
+		game.collectChips();
+		assertTrue(game.getRoundWinner().contains(player2));
+		assertTrue(game.getRoundWinner().size() == 1);
+		assertEquals(55,player2.getChips());
+	}
+	
+	@Test
+	public void test_round_winner_with_zero_score_loser()
+	{
+		die1 = new PreProgrammedSkunkDie(new Integer[]
+		{ 0, 6 });
+		die2 = new PreProgrammedSkunkDie(new Integer[]
+		{ 0, 6 });
+		game = new SkunkGame(die1, die2, players);
+
+		game.playGameForOneRound(player1);
+		game.finishRound(player1);
+		game.playGameForOneRound(player2);
+		game.finishRound(player2);
+		game.collectChips();
+		assertTrue(game.getRoundWinner().contains(player2));
+		assertTrue(game.getRoundWinner().size() == 1);
+		assertEquals(60,player2.getChips());
 	}
 	
 	@Test
@@ -190,6 +232,20 @@ public class SkunkGameTest
 		game = new SkunkGame(die1, die2, players);
 
 		assertNotNull(game.getGameInstructions());
+	}
+	
+	@Test
+	public void test_displayChipNumbers() {
+		game = new SkunkGame(die1, die2, players);
+		assertEquals("\nPlayerOne, total score:0, chips:50" + 
+				"\nPlayerTwo, total score:0, chips:50",game.displayChipNumbers());
+	}
+	
+	@Test
+	public void test_roundChips() {
+		game = new SkunkGame(die1, die2, players);
+		game.setRoundChips(5);
+		assertEquals(5, game.getRoundChips());
 	}
 
 }

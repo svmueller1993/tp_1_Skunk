@@ -28,6 +28,28 @@ public class PreProgrammedSkunkDieTest
 		die.roll();
 		assertEquals(1, die.getLastRoll());
 	}
+	
+	@Test
+	public void testGetLastRollWithoutRolling()
+	{
+		PreProgrammedSkunkDie die = new PreProgrammedSkunkDie();
+		assertEquals(1, die.getLastRoll());
+	}
+	
+	@Test
+	public void testGetLastRollMoreThanListSize()
+	{
+		PreProgrammedSkunkDie die = new PreProgrammedSkunkDie();
+		die.roll();
+		die.roll();
+		die.roll();
+		die.roll();
+		die.roll();
+		die.roll();
+		die.roll();
+		die.roll();
+		assertEquals(1, die.getLastRoll());
+	}
 
 	@Test
 	public void testPreProgrammedSkunkDie()

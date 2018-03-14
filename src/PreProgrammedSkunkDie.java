@@ -39,7 +39,7 @@ public class PreProgrammedSkunkDie extends SkunkDie
 	@Override
 	public int getLastRoll()
 	{
-		if (predefinedRoll == predefinedValues.size())
+		if (predefinedRoll >= predefinedValues.size())
 		{
 			predefinedRoll = 0;
 		}

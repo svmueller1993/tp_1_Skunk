@@ -46,11 +46,40 @@ public class SkunkPlayerTest
 	}
 	
 	@Test
+	public void testSetPlayerName()
+	{
+		String name = "Test Player";
+		SkunkPlayer p = new SkunkPlayer("");
+		p.setName(name);
+		assertTrue(p.getName() == name);
+	}
+	
+	@Test
 	public void testGetChipsSetChips()
 	{
 		SkunkPlayer p = new SkunkPlayer("Test Player");
 		p.setChips(55);
 		assertTrue(p.getChips() == 55);
+	}
+	
+	@Test
+	public void testToString()
+	{
+		SkunkPlayer p = new SkunkPlayer("Test Player");
+		assertEquals("Name: Test Player, score: 0, chips: 50", p.toString());
+	}
+	
+	@Test
+	public void testClearScore()
+	{
+		SkunkPlayer p = new SkunkPlayer("Test Player");
+		p.setLastRoundScore(1);
+		p.setRoundScore(1);
+		p.setTotalScore(1);
+		p.clearScores();
+		assertEquals(0,p.getLastRoundScore());
+		assertEquals(0,p.getTotalScore());
+		assertEquals(0,p.getRoundScore());
 	}
 	
 }
