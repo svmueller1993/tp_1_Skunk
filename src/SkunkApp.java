@@ -17,7 +17,7 @@ public class SkunkApp
 		SkunkDie d2 = new SkunkDie();
 		List<SkunkPlayer> players = new ArrayList<SkunkPlayer>();
 
-		StdOut.println("You may have up to 8 players. Please, enter number only. How many players would like to play? ");
+		StdOut.println("You may have up to 8 players. Please, enter numbers only. How many players would like to play? ");
 		int num = StdIn.readInt();
 		for (int i = 0; i < num; i++)
 		{
@@ -45,14 +45,14 @@ public class SkunkApp
 		do
 		{
 			int roundNumber = 0;
-			while (roundNumber < 6)
+outterloop: 	while (roundNumber < 6)
 			{
 				StdOut.println("====================================================");
 				StdOut.println("Round: " + (roundNumber + 1));
 				for (Iterator<SkunkPlayer> iterator = players.iterator(); iterator.hasNext();)
 				{
 					SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
-					StdOut.println("Your turn, player name: " + skunkPlayer.getName()
+					StdOut.println("Your turn " + skunkPlayer.getName()
 						+ " (score: "+ skunkPlayer.getCurrentScore() +", chips: "+ skunkPlayer.getChips() +")");
 					game.printAllPlayerScores();
 					StdOut.println("--------------------------------------------------");
@@ -67,22 +67,23 @@ public class SkunkApp
 							// next player will take turn
 							skunkPlayer.setLastRoundScore(skunkPlayer.getRoundScore());
 							game.finishRound(skunkPlayer);
+							if (skunkPlayer.getCurrentScore() >= 100)
+							{
+								StdOut.println("==================================================");
+								StdOut.println("\n" + skunkPlayer.getName() + "'s total score is: " + skunkPlayer.getCurrentScore());
+								StdOut.println("Your score is more than 100.");
+								StdOut.println("The game winner is: " + skunkPlayer.getName());
+								skunkPlayer.setLastRoundScore(skunkPlayer.getRoundScore());
+								game.finishRound(skunkPlayer);
+								game.finalGameRound(skunkPlayer);
+								break outterloop;
+							}
 							break;
 						}
 						continueGame = game.playGameForOneRound(skunkPlayer);
-
-						if (d.equals("n") && skunkPlayer.getCurrentScore() >= 100)
-						{
-							StdOut.println("==================================================");
-							StdOut.println("Player total score is: " + skunkPlayer.getCurrentScore());
-							StdOut.println("Your score is more than 100.");
-							StdOut.println("The game winner is: " + skunkPlayer.getName());
-							skunkPlayer.setLastRoundScore(skunkPlayer.getRoundScore());
-							game.finishRound(skunkPlayer);
-							break;
-						}
+							
 					}
-					StdOut.println("Your turn is finished, " + skunkPlayer.getName()
+					StdOut.println("Your turn is over, " + skunkPlayer.getName()
 							+ " (Total score: "+ skunkPlayer.getCurrentScore() +", round score: " + skunkPlayer.getLastRoundScore() + ", chips: "+ skunkPlayer.getChips() +")");
 					StdOut.println("Total chips in the kitty: " + game.getRoundChips());
 					StdOut.println("===================================================");
@@ -120,7 +121,7 @@ public class SkunkApp
 				}
 			}
 
-			StdOut.println("\nWould you like to continue play game?(y/n)");
+			StdOut.println("\nWould you like to play another game?(y/n)");
 			String y = StdIn.readString();
 			if (y.equals("y"))
 			{

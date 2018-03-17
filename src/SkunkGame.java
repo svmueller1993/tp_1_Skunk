@@ -57,10 +57,11 @@ public class SkunkGame
 	
 	public void printAllPlayerScores()
 	{
+		StdOut.println("\nThe Scoreboard is: ");
 		for(Iterator iterator = players.iterator(); iterator.hasNext();)
 		{
 			SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
-			StdOut.println(skunkPlayer.getName() + ": total score: " + skunkPlayer.getTotalScore() + ", chips: " + skunkPlayer.getChips());
+			StdOut.println("\n" + skunkPlayer.getName() + ": total score: " + skunkPlayer.getTotalScore() + ", chips: " + skunkPlayer.getChips());
 		}
 	}
 	
@@ -133,7 +134,7 @@ public class SkunkGame
 		{
 			player.setTotalScore(0);
 			player.setChips(player.getChips() - 4);
-			StdOut.println("You rolled two skunks, all scores have been set back to 0." + " You have " + player.getChips() + " chips left.");
+			StdOut.println("\nYou rolled two skunks, all scores have been set back to 0. You have " + player.getChips() + " chips left.");
 			player.setRoundScore(0);
 			roundChips = roundChips + 4;
 			finishRound(player);
@@ -144,13 +145,13 @@ public class SkunkGame
 			if (rollScore == 3) //rolling a skunk and a "Deuce, needs to be in this if statement because if they roll a 2 and a 1 it goes to both statements and removes chips from both
 			{
 				player.setChips(player.getChips() - 2);
-				StdOut.println("You rolled one skunk and a duece, next player will take turn." + " You have " + player.getChips() + " chips left");
+				StdOut.println("\nYou rolled one skunk and a duece. You have " + player.getChips() + " chips left");
 				roundChips = roundChips + 2;
 			}
 			else 
 			{
 				player.setChips(player.getChips() - 1);
-				StdOut.println("You rolled one skunks, next player will take turn." + " You have " + player.getChips() + " chips left.");
+				StdOut.println("\nYou rolled a skunk. You have " + player.getChips() + " chips left.");
 				roundChips ++;
 			}
 			
@@ -187,7 +188,7 @@ public class SkunkGame
 	 */
 	public String getGameInstructions() 
 	{
-		return "The objective of the game is to accumulate a score of 100 points or more. A score is made by rolling the dice and combining \n"
+		return "\nThe objective of the game is to accumulate a score of 100 points or more. A score is made by rolling the dice and combining \n"
 				+ "the points on the two dice. The player has the privilege of continuing to shake to increase his score or of passing the dice to wait for \n"
 				+ "the next series, thus preventing the possibility of rolling a Skunk and losing his score.\n"
 				+ "Any number of players can play,The suggested number of chips to start is 50 \n"
@@ -242,6 +243,48 @@ public class SkunkGame
 		roundChips = roundChips % list.size();		
 	}
 	
+	public void finalGameRound(SkunkPlayer winner)
+	{
+		for(int i = 0; i < players.size(); i++)
+		{
+			SkunkPlayer p = players.get(i);
+			if (p != winner)
+			{	
+				StdOut.println("\n" + p.getName() + " you have one more chance to get to 100.");
+				boolean continueGame = true;
+				while (continueGame)
+				{
+					StdOut.println("\n" + p.getName() + " Would you like to roll the dice(y/n)?");
+					String d = StdIn.readString();
+					if (d.equals("n"))
+					{
+						// next player will take turn
+						p.setLastRoundScore(p.getRoundScore());
+						this.finishRound(p);
+						if (p.getCurrentScore() >= 100)
+						{
+							StdOut.println("==================================================");
+							StdOut.println(p.getName() + "'s total score is: " + p.getCurrentScore());
+							StdOut.println("Your score is more than 100.");
+							StdOut.println("The game winner is: " + p.getName());
+							p.setLastRoundScore(p.getRoundScore());
+							p.setGamesWon(p.getGamesWon() + 1);
+							this.finishRound(p);
+							this.finalGameRound(p);
+							break;
+					
+						}
+						break;
+					}
+					
+					else
+					{
+						continueGame = this.playGameForOneRound(p);
+					}
+				}
+			}
+		}
+	}
 
 	public String displayChipNumbers()
 	{
@@ -249,8 +292,8 @@ public class SkunkGame
 		for (int i = 0; i < players.size(); i++) 
 		{	
 			SkunkPlayer p = players.get(i);
-			str = str + "\n" + p.getName() + ", total score:" + p.getTotalScore()
-			+ ", chips:" + p.getChips();
+			str = str + "\n" + p.getName() + ", total score: " + p.getTotalScore()
+			+ ", chips: " + p.getChips();
 		}
 		return str;
 	}
