@@ -260,8 +260,8 @@ public class SkunkGameTest
 	@Test
 	public void test_displayChipNumbers() {
 		game = new SkunkGame(die1, die2, players);
-		assertEquals("\nPlayerOne, total score:0, chips:50" + 
-				"\nPlayerTwo, total score:0, chips:50",game.displayChipNumbers());
+		assertEquals("\nPlayerOne, total score: 0, chips: 50" + 
+				"\nPlayerTwo, total score: 0, chips: 50",game.displayChipNumbers());
 	}
 	
 	@Test

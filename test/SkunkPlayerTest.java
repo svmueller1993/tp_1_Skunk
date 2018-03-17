@@ -66,7 +66,8 @@ public class SkunkPlayerTest
 	public void testToString()
 	{
 		SkunkPlayer p = new SkunkPlayer("Test Player");
-		assertEquals("Name: Test Player, total score: 0, round score: 0, chips: 50", p.toString());
+		System.out.println(p.toString());
+		assertEquals("Name: Test Player, total score: 0, round score: 0, chips: 50, games won: 0", p.toString());
 	}
 	
 	@Test
