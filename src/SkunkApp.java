@@ -71,12 +71,12 @@ public class SkunkApp
 						}
 						continueGame = game.playGameForOneRound(skunkPlayer);
 
-						if (skunkPlayer.getCurrentScore() >= 100)
+						if (d.equals("n") && skunkPlayer.getCurrentScore() >= 100)
 						{
 							StdOut.println("==================================================");
 							StdOut.println("Player total score is: " + skunkPlayer.getCurrentScore());
 							StdOut.println("Your score is more than 100.");
-							StdOut.println("The round winner is: " + skunkPlayer.getName());
+							StdOut.println("The game winner is: " + skunkPlayer.getName());
 							skunkPlayer.setLastRoundScore(skunkPlayer.getRoundScore());
 							game.finishRound(skunkPlayer);
 							break;
