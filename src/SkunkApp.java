@@ -54,6 +54,7 @@ public class SkunkApp
 					SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
 					StdOut.println("Your turn, player name: " + skunkPlayer.getName()
 						+ " (score: "+ skunkPlayer.getCurrentScore() +", chips: "+ skunkPlayer.getChips() +")");
+					game.printAllPlayerScores();
 					StdOut.println("--------------------------------------------------");
 
 					boolean continueGame = true;
@@ -114,19 +115,21 @@ public class SkunkApp
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
 					SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
+					skunkPlayer.setGamesWon(skunkPlayer.getGamesWon() + 1);
 					StdOut.println(skunkPlayer);
 				}
 			}
 
 			StdOut.println("\nWould you like to continue play game?(y/n)");
 			String y = StdIn.readString();
-			// Part of assignment 3 - option to print out instructions
 			if (y.equals("y"))
 			{
+				
 				// clear previous round scores
-				for (Iterator iterator = list.iterator(); iterator.hasNext();)
+				for (Iterator iterator = players.iterator(); iterator.hasNext();)
 				{
 					SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
+					skunkPlayer.clearScores();
 					StdOut.println(skunkPlayer);
 				}
 				continue;

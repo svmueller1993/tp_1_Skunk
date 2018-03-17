@@ -8,6 +8,7 @@ public class SkunkPlayer
 	private String name;
 	private int totalScore;
 	private int roundScore;
+	private int gamesWon;
 	private int lastRoundScore;
 	private int chips;
 	
@@ -16,8 +17,18 @@ public class SkunkPlayer
 		this.name = name;
 		this.totalScore = 0;
 		this.chips = 50; 
+		this.gamesWon = 0;
 	}
 
+	public int getGamesWon()
+	{
+		return gamesWon;
+	}
+	
+	public void setGamesWon(int gamesWon)
+	{
+		this.gamesWon = gamesWon;
+	}
 	public String getName()
 	{
 		return name;
@@ -82,6 +93,6 @@ public class SkunkPlayer
 	@Override
 	public String toString()
 	{
-		return "Name: " + name + ", total score: " + totalScore + ", round score: " + lastRoundScore + ", chips: " + chips;
+		return "Name: " + name + ", total score: " + totalScore + ", round score: " + lastRoundScore + ", chips: " + chips + ", games won: " + gamesWon;
 	}
 }

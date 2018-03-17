@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -54,6 +55,14 @@ public class SkunkGame
 		return roundWinner;
 	}
 	
+	public void printAllPlayerScores()
+	{
+		for(Iterator iterator = players.iterator(); iterator.hasNext();)
+		{
+			SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
+			StdOut.println(skunkPlayer.getName() + ": total score: " + skunkPlayer.getTotalScore() + ", chips: " + skunkPlayer.getChips());
+		}
+	}
 	
 	
 	public List<SkunkPlayer> getGameScoreWinner()
