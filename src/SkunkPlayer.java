@@ -29,6 +29,7 @@ public class SkunkPlayer
 	{
 		this.gamesWon = gamesWon;
 	}
+	
 	public String getName()
 	{
 		return name;

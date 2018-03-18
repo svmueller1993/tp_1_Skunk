@@ -83,4 +83,12 @@ public class SkunkPlayerTest
 		assertEquals(0,p.getRoundScore());
 	}
 	
+	@Test
+	public void testGamesWon()
+	{
+		SkunkPlayer p = new SkunkPlayer("Test Player");
+		p.setGamesWon(1);
+		assertEquals(1, p.getGamesWon());
+	}
+	
 }

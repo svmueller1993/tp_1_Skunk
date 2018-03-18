@@ -75,7 +75,46 @@ outterloop: 	while (roundNumber < 6)
 								StdOut.println("The game winner is: " + skunkPlayer.getName());
 								skunkPlayer.setLastRoundScore(skunkPlayer.getRoundScore());
 								game.finishRound(skunkPlayer);
-								game.finalGameRound(skunkPlayer);
+								
+								for(int i = 0; i < players.size(); i++)
+								{
+									SkunkPlayer p = players.get(i);
+									if (p != skunkPlayer)
+									{	
+										StdOut.println("\n" + p.getName() + " you have one more chance to get to 100.");
+										boolean continueRoundGame = true;
+										while (continueRoundGame)
+										{
+											StdOut.println("\n" + p.getName() + " Would you like to roll the dice(y/n)?");
+											d = StdIn.readString();
+											if (d.equals("n"))
+											{
+												// next player will take turn
+												p.setLastRoundScore(p.getRoundScore());
+												game.finishRound(p);
+												if (p.getCurrentScore() >= 100)
+												{
+													StdOut.println("==================================================");
+													StdOut.println(p.getName() + "'s total score is: " + p.getCurrentScore());
+													StdOut.println("Your score is more than 100.");
+													StdOut.println("The game winner is: " + p.getName());
+													p.setLastRoundScore(p.getRoundScore());
+													p.setGamesWon(p.getGamesWon() + 1);
+													game.finishRound(p);
+													game.finalGameRound(p);
+													break;
+											
+												}
+												break;
+											}
+											
+											else
+											{
+												continueRoundGame = game.playGameForOneRound(p);
+											}
+										}
+									}
+								}
 								break outterloop;
 							}
 							break;
