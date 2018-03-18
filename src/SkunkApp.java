@@ -16,9 +16,17 @@ public class SkunkApp
 		SkunkDie d1 = new SkunkDie();
 		SkunkDie d2 = new SkunkDie();
 		List<SkunkPlayer> players = new ArrayList<SkunkPlayer>();
+		int num;
+		while (true) {
+			StdOut.println("How many players would like to play (2-8)? ");
+			num = StdIn.readInt();
 
-		StdOut.println("You may have up to 8 players. Please, enter numbers only. How many players would like to play? ");
-		int num = StdIn.readInt();
+			if (num < 2 || num > 8) {
+				StdOut.println("Invalid number. Please enter again.");
+			} else {
+				break;
+			}
+		}
 		for (int i = 0; i < num; i++)
 		{
 			StdOut.println("Enter the name of player: " + (i + 1));
@@ -155,6 +163,7 @@ outterloop: 	while (roundNumber < 6)
 			StdOut.println("Collected chips.");
 			StdOut.println("This game winner:");
 			List<SkunkPlayer> list = game.getGameScoreWinner();
+			StdOut.println("=======================================");
 			if (list != null) {
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
