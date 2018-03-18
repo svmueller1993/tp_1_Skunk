@@ -55,17 +55,6 @@ public class SkunkGame
 		return roundWinner;
 	}
 	
-	public void printAllPlayerScores()
-	{
-		StdOut.println("\nThe Scoreboard is: ");
-		for(Iterator iterator = players.iterator(); iterator.hasNext();)
-		{
-			SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
-			StdOut.println("\n" + skunkPlayer.getName() + ": total score: " + skunkPlayer.getTotalScore() + ", chips: " + skunkPlayer.getChips());
-		}
-	}
-	
-	
 	public List<SkunkPlayer> getGameScoreWinner()
 	{
 		int maxScore = players.get(0).getTotalScore();
@@ -243,49 +232,6 @@ public class SkunkGame
 		roundChips = roundChips % list.size();		
 	}
 	
-	public void finalGameRound(SkunkPlayer winner)
-	{
-		for(int i = 0; i < players.size(); i++)
-		{
-			SkunkPlayer p = players.get(i);
-			if (p != winner)
-			{	
-				StdOut.println("\n" + p.getName() + " you have one more chance to get to 100.");
-				boolean continueGame = true;
-				while (continueGame)
-				{
-					StdOut.println("\n" + p.getName() + " Would you like to roll the dice(y/n)?");
-					String d = StdIn.readString();
-					if (d.equals("n"))
-					{
-						// next player will take turn
-						p.setLastRoundScore(p.getRoundScore());
-						this.finishRound(p);
-						if (p.getCurrentScore() >= 100)
-						{
-							StdOut.println("==================================================");
-							StdOut.println(p.getName() + "'s total score is: " + p.getCurrentScore());
-							StdOut.println("Your score is more than 100.");
-							StdOut.println("The game winner is: " + p.getName());
-							p.setLastRoundScore(p.getRoundScore());
-							p.setGamesWon(p.getGamesWon() + 1);
-							this.finishRound(p);
-							this.finalGameRound(p);
-							break;
-					
-						}
-						break;
-					}
-					
-					else
-					{
-						continueGame = this.playGameForOneRound(p);
-					}
-				}
-			}
-		}
-	}
-
 	public String displayChipNumbers()
 	{
 		String str = "";

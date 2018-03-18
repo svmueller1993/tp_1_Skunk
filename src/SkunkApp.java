@@ -54,7 +54,12 @@ outterloop: 	while (roundNumber < 6)
 					SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
 					StdOut.println("Your turn " + skunkPlayer.getName()
 						+ " (score: "+ skunkPlayer.getCurrentScore() +", chips: "+ skunkPlayer.getChips() +")");
-					game.printAllPlayerScores();
+					StdOut.println("\nThe Scoreboard is: ");
+					for(Iterator iterator1 = players.iterator(); iterator1.hasNext();)
+					{
+						SkunkPlayer skunkPlayer1 = (SkunkPlayer) iterator1.next();
+						StdOut.println("\n" + skunkPlayer1.getName() + ": total score: " + skunkPlayer1.getTotalScore() + ", chips: " + skunkPlayer1.getChips());
+					}
 					StdOut.println("--------------------------------------------------");
 
 					boolean continueGame = true;
@@ -101,7 +106,6 @@ outterloop: 	while (roundNumber < 6)
 													p.setLastRoundScore(p.getRoundScore());
 													p.setGamesWon(p.getGamesWon() + 1);
 													game.finishRound(p);
-													game.finalGameRound(p);
 													break;
 											
 												}
@@ -110,7 +114,7 @@ outterloop: 	while (roundNumber < 6)
 											
 											else
 											{
-												continueRoundGame = game.playGameForOneRound(p);
+												continueGame = game.playGameForOneRound(p);
 											}
 										}
 									}
