@@ -89,6 +89,7 @@ public class SkunkPlayer
 		totalScore = 0;
 		roundScore = 0;
 		lastRoundScore = 0;
+		chips = 50;
 	}
 	
 	@Override

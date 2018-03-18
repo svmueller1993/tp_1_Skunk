@@ -163,8 +163,7 @@ outterloop: 	while (roundNumber < 6)
 			StdOut.println("Collected chips.");
 			StdOut.println("This game winner:");
 			List<SkunkPlayer> list = game.getGameScoreWinner();
-			StdOut.println("=======================================");
-			if (list != null) {
+				if (list != null) {
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
 					SkunkPlayer skunkPlayer = (SkunkPlayer) iterator.next();
@@ -172,7 +171,7 @@ outterloop: 	while (roundNumber < 6)
 					StdOut.println(skunkPlayer);
 				}
 			}
-
+			StdOut.println("===================================================");
 			StdOut.println("\nWould you like to play another game?(y/n)");
 			String y = StdIn.readString();
 			if (y.equals("y"))
